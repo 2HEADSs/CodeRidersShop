@@ -13,7 +13,7 @@ body {
   font-family: Arial, sans-serif;
 }
 
-.main-container {
+#root {
   margin: 0; 
   padding-top: 20px; 
   color: white; /* To make sure the text is visible */
