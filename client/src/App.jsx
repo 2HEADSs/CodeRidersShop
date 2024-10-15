@@ -1,6 +1,7 @@
-import { Routes } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 import './App.css'
 import Header from './components/header/Header'
+import Home from './components/header/home/Home'
 
 function App() {
 
@@ -9,6 +10,9 @@ function App() {
     //be hidden when scroling
     <>
       <Header />
+      <Routes>
+        <Route path='/' element={<Home />} />
+      </Routes>
       <h1>Test Heading</h1>
     </>
   )
