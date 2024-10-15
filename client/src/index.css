@@ -1,4 +1,6 @@
-html, body, #root {
+html,
+body,
+#root {
   height: 100vh;
   margin: 0;
   padding: 0;
@@ -6,16 +8,16 @@ html, body, #root {
 
 body {
   background-image: url('/wallpaperflare.com_wallpaper_2.jpg');
-  background-size: cover; 
-  background-position: center; 
-  background-repeat: no-repeat; 
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   background-attachment: fixed;
   font-family: Arial, sans-serif;
 }
 
 #root {
-  margin: 0; 
-  padding-top: 20px; 
-  color: white; /* To make sure the text is visible */
-  text-align: center; /* Center the heading */
+  /* margin: 0; 
+  padding-top: 20px;  */
+  color: white;
+  text-align: center;
 }
