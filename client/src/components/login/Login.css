@@ -49,7 +49,7 @@
     border-radius: 10px;
     box-sizing: border-box;
     background: rgba(255, 255, 255, 0.7);
-    
+
 }
 
 .login-button {
@@ -66,4 +66,20 @@
 
 .login-button:hover {
     background-color: #173905;
+}
+
+.register-link {
+    margin-top: 15px;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 20px;
+}
+
+.register-link a {
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.register-link a:hover {
+    text-decoration: underline;
 }
