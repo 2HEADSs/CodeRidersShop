@@ -1,12 +1,12 @@
-/* Container Styling */
+
 .register-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: calc(50vh - 200px);
+    margin-top: 50px;
 }
 
-/* Form Styling */
+
 .register-form {
     border: 5px solid rgba(255, 255, 255, 0.5);
     border-color: black;
@@ -20,14 +20,14 @@
     background: rgba(97, 95, 95, 0.7);
 }
 
-/* Header Styling */
+
 .register-form h2 {
     margin-bottom: 5%;
     font-size: 32px;
     color: rgba(255, 255, 255, 0.9);
 }
 
-/* Input Group Styling */
+
 .input-group {
     width: 100%;
     margin-bottom: 15px;
@@ -50,7 +50,7 @@
     background: rgba(255, 255, 255, 0.7);
 }
 
-/* Register Button Styling */
+
 .register-button {
     width: 100%;
     padding: 12px;
