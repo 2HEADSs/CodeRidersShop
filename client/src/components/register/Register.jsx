@@ -1,12 +1,12 @@
-import './Register.css';
+import styles from './Register.module.css'; // Import the CSS module
 
 export default function Register() {
     return (
-        <div className="register-container">
-            <form className="register-form">
+        <div className={styles.registerContainer}>
+            <form className={styles.registerForm}>
                 <h2>Register</h2>
 
-                <div className="input-group">
+                <div className={styles.inputGroup}>
                     <label htmlFor="email">Email</label>
                     <input
                         type="email"
@@ -15,7 +15,7 @@ export default function Register() {
                     />
                 </div>
 
-                <div className="input-group">
+                <div className={styles.inputGroup}>
                     <label htmlFor="password">Password</label>
                     <input
                         type="password"
@@ -24,7 +24,7 @@ export default function Register() {
                     />
                 </div>
 
-                <div className="input-group">
+                <div className={styles.inputGroup}>
                     <label htmlFor="confirm-password">Confirm Password</label>
                     <input
                         type="password"
@@ -33,9 +33,9 @@ export default function Register() {
                     />
                 </div>
 
-                <button type="submit" className="register-button">Register</button>
+                <button type="submit" className={styles.registerButton}>Register</button>
 
-                <div className="login-link">
+                <div className={styles.loginLink}>
                     Already have an account? <a href="/login">Login</a>
                 </div>
             </form>

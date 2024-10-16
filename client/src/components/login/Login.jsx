@@ -1,13 +1,13 @@
-import './Login.css';
+import styles from './Login.module.css'
 
 
 export default function Login() {
     return (
-        <div className="login-container">
-            <form className="login-form" >
+        <div className={styles.loginContainer}>
+            <form className={styles.loginForm}>
                 <h2>Login</h2>
 
-                <div className="input-group">
+                <div className={styles.inputGroup}>
                     <label htmlFor="email">Email</label>
                     <input
                         type="email"
@@ -15,7 +15,7 @@ export default function Login() {
                     />
                 </div>
 
-                <div className="input-group">
+                <div className={styles.inputGroup}>
                     <label htmlFor="password">Password</label>
                     <input
                         type="password"
@@ -23,8 +23,8 @@ export default function Login() {
                     />
                 </div>
 
-                <button type="submit" className="login-button">Login</button>
-                <div className="register-link">
+                <button type="submit" className={styles.loginButton}>Login</button>
+                <div className={styles.registerLink}>
                     Don't have an account? <a href="/register">Register</a>
                 </div>
             </form>

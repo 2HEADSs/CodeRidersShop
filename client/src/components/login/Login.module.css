@@ -1,13 +1,12 @@
 
-.register-container {
+.loginContainer {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-top: 50px;
 }
 
-
-.register-form {
+.loginForm {
     border: 5px solid rgba(255, 255, 255, 0.5);
     border-color: black;
     padding: 20px;
@@ -20,27 +19,25 @@
     background: rgba(97, 95, 95, 0.7);
 }
 
-
-.register-form h2 {
+h2 {
     margin-bottom: 5%;
     font-size: 32px;
     color: rgba(255, 255, 255, 0.9);
 }
 
-
-.input-group {
+.inputGroup {
     width: 100%;
     margin-bottom: 15px;
 }
 
-.input-group label {
+.inputGroup label {
     display: block;
     font-size: 18px;
     margin-bottom: 5px;
     color: rgba(255, 255, 255, 0.9);
 }
 
-.input-group input {
+.inputGroup input {
     width: 100%;
     padding: 10px;
     font-size: 16px;
@@ -50,8 +47,7 @@
     background: rgba(255, 255, 255, 0.7);
 }
 
-
-.register-button {
+.loginButton {
     width: 100%;
     padding: 12px;
     background-color: #333;
@@ -63,22 +59,22 @@
     transition: background-color 0.3s ease;
 }
 
-.register-button:hover {
-    background-color: #173
+.loginButton:hover {
+    background-color: #173905;
 }
 
-.login-link {
+.registerLink {
     margin-top: 15px;
     color: rgba(255, 255, 255, 0.9);
     font-size: 20px;
 }
 
-.login-link a {
+.registerLink a {
     color: rgb(255, 255, 255);
     text-decoration: none;
     font-weight: bold;
 }
 
-.login-link a:hover {
+.registerLink a:hover {
     text-decoration: underline;
 }
