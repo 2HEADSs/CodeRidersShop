@@ -1,20 +1,20 @@
-import './Header.css';
+import { Link } from 'react-router-dom';
+import styles from './Header.module.css';
 
 export default function Header() {
     return (
-        <header className="header">
-            <nav className="navbar">
-                <div className="navbar-left">
-                    <a href="/" className="nav-item">Home</a>
+        <header className={styles.header}>
+            <nav className={styles.navbar}>
+                <div className={styles.navbarHomeLink}>
+                    <Link to="/" className={styles.navItem}>Home</Link>
                 </div>
-                <div className="navbar-right">
-                    <a href="/login" className="nav-item">Login</a>
-                    <a href="/register" className="nav-item">Register</a>
-                    <a href="/catalog" className="nav-item">Catalog</a>
-                    <a href="/user" className="nav-item">User</a>
+                <div className={styles.navbarRightLink}>
+                    <Link to="/login" className={styles.navItem}>Login</Link>
+                    <Link to="/register" className={styles.navItem}>Register</Link>
+                    <Link to="/catalog" className={styles.navItem}>Catalog</Link>
+                    <Link to="/user" className={styles.navItem}>User</Link>
                 </div>
             </nav>
         </header>
     );
 }
-
