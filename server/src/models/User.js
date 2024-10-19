@@ -1,12 +1,22 @@
 import mongoose from 'mongoose';
 const { Schema, model, Types: { ObjectId } } = mongoose;
 
+const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+const phoneRegex = /^\+?(\d{1,3})?[-. (]?\d{1,4}[-. )]?\d{1,4}[-. ]?\d{1,9}$/;
+
+
 const userSchema = new Schema({
     email: {
         type: String,
         required: true,
         unique: true,
         trim: true,
+        validate: {
+            validator: function (value) {
+                return emailRegex.test(value);
+            },
+            message: props => `${props.value} is not a valid email address!`
+        }
     },
     firstName: {
         type: String,
@@ -24,7 +34,12 @@ const userSchema = new Schema({
         type: String,
         trim: true,
         default: '',
-        //TODO: validate phone number
+        validate: {
+            validator: function (value) {
+                return value === '' || phoneRegex.test(value);
+            },
+            message: props => `${props.value} is not a valid phone number!`
+        }
     },
     hashedPassword: { type: String, required: true, select: false },
     //TODO
