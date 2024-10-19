@@ -2,6 +2,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import router from './src/router.js'
 import cors from './src/middlewares/cors.js';
+import sanitize from './src/middlewares/sanitize.js';
 
 
 
@@ -23,6 +24,7 @@ function serverStart() {
     runDB();
     app.use(express.json())
     app.use(cors())
+    app.use(sanitize)
     app.use(router)
     app.listen(3000, () => console.log('Server is running on port 3000'));
 }
