@@ -45,7 +45,7 @@ const userSchema = new Schema({
     //TODO
     // bikesForSale: [{ type: ObjectId, ref: '' }],
     // likedBikes: [{ type: ObjectId, ref: '' }],
-    // isActive
+    // City
 });
 
 userSchema.index(
