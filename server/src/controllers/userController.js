@@ -38,7 +38,6 @@ userController.post('/register', async (req, res) => {
         }
 
         const user = await registerUser(userData)
-        console.log(`User from Controlles ${user}`);
         res.status(200);
         res.send(user);
         res.end();
