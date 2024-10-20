@@ -8,35 +8,23 @@ export default function Register() {
 
                 <div className={styles.inputGroup}>
                     <label htmlFor="email">Email</label>
-                    <input
-                        type="email"
-                        id="email"
-                        required
-                    />
+                    <input type="email" id="email" equired />
                 </div>
 
                 <div className={styles.inputGroup}>
                     <label htmlFor="password">Password</label>
-                    <input
-                        type="password"
-                        id="password"
-                        required
-                    />
+                    <input type="password" id="password" required />
                 </div>
 
                 <div className={styles.inputGroup}>
                     <label htmlFor="confirm-password">Confirm Password</label>
-                    <input
-                        type="password"
-                        id="confirm-password"
-                        required
-                    />
+                    <input type="password" id="confirm-password" required />
                 </div>
 
                 <button type="submit" className={styles.registerButton}>Register</button>
 
                 <div className={styles.loginLink}>
-                    Already have an account? <a href="/login">Login</a>
+                    Already have an account? <a href="/login">Click here!</a>
                 </div>
             </form>
         </div>
