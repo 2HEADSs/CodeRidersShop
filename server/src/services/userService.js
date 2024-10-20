@@ -23,7 +23,8 @@ async function registerUser(userData) {
 async function loginUser(email, password) {
 
 
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email }).select('+hashedPassword');
+
     if (!user) {
         throw new Error('Wrong email or password!');
     }
@@ -40,9 +41,13 @@ async function loginUser(email, password) {
         throw new Error('User is not valid!');
     }
 
-    const accessToken = createAccessToken(user);
+    const userWithoutPassword = user.toObject();
+    delete userWithoutPassword.hashedPassword;
+    console.log(userWithoutPassword);
 
-    return { user, accessToken };
+    const accessToken = createAccessToken(userWithoutPassword);
+
+    return { user: userWithoutPassword, accessToken };
 
 }
 
