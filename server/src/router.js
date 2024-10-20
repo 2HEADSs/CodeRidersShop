@@ -1,5 +1,5 @@
 import express from 'express';
-import userRouter from './controllers/userController.js';
+import userController from './controllers/userController.js';
 import bikesRouter from './controllers/bikesController.js';
 
 const router = express.Router();
@@ -9,7 +9,7 @@ router.get('/', (req, res) => {
     res.json({ message: 'Service operational..' });
 });
 
-router.use('/user', userRouter)
+router.use('/user', userController)
 router.use('/bikes', bikesRouter)
 
 

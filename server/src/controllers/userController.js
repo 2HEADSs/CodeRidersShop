@@ -1,10 +1,10 @@
 import express from 'express';
 import bcrypt from 'bcryptjs'
-const userRouter = express.Router();
-import { registerUser } from '../services/userService.js';
+const userController = express.Router();
+import { loginUser, registerUser } from '../services/userService.js';
 
 
-userRouter.post('/register', async (req, res) => {
+userController.post('/register', async (req, res) => {
     try {
         //TODO: check password for empty symbols
 
@@ -35,20 +35,31 @@ userRouter.post('/register', async (req, res) => {
             lastName: req.body.lastName ? req.body.lastName : '',
             phone: req.body.phone ? req.body.phone : '',
             hashedPassword: await bcrypt.hash(req.body.password, 10),
-        };
+        }
 
         const user = await registerUser(userData)
         console.log(`User from Controlles ${user}`);
         res.status(200);
-        res.send(user)
-        res.end()
+        res.send(user);
+        res.end();
     } catch (error) {
-        res.status(400).json({ error: error.message })
+        res.status(400).json({ error: error.message });
 
     }
 
 });
 
+userController.post('/login', async (req, res) => {
+    try {
+        const user = await loginUser(req.body.email, req.body.password);
+        res.status(200);
+        res.send(user);
+        res.end();
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+})
 
 
-export default userRouter;
+
+export default userController;

@@ -1,21 +1,49 @@
 import dotenv from 'dotenv';
 dotenv.config();
+import jwt from 'jsonwebtoken';
+import bcrypt from 'bcryptjs'
 
-import User from "../models/User.js"
-import jwt from 'jsonwebtoken'
-const secretForAccessToken = process.env.AUTH_TOKEN_SECRET
+import User from "../models/User.js";
+const secretForAccessToken = process.env.AUTH_TOKEN_SECRET;
 
 
 async function registerUser(userData) {
 
-    // const email = requestBody.email;
-    // const hashedPassword = requestBody.hashedPassword;
-
     const user = await User.create(userData);
-    console.log(`User from Service ${user}`);
-    const accessToken = createAccessToken(user)
+    const userWithoutPassword = user.toObject();
+    delete userWithoutPassword.hashedPassword;
+    const accessToken = createAccessToken(user);
+    console.log(userWithoutPassword);
+
+
+    return { user: userWithoutPassword, accessToken };
+}
+
+
+async function loginUser(email, password) {
+
+
+    const user = await User.findOne({ email });
+    if (!user) {
+        throw new Error('Wrong email or password!');
+    }
+
+    const comparePassword = bcrypt.compare(password, user.hashedPassword);
+
+    if (!comparePassword) {
+        throw new Error('Wrong email or password!');
+    }
+
+
+    const validateUser = user.validateSync();
+    if (validateUser) {
+        throw new Error('User is not valid!');
+    }
+
+    const accessToken = createAccessToken(user);
 
     return { user, accessToken };
+
 }
 
 function createAccessToken(user) {
@@ -27,4 +55,4 @@ function createAccessToken(user) {
     return jwt.sign(payload, secretForAccessToken)
 }
 
-export { registerUser }
+export { registerUser, loginUser }

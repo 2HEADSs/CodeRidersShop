@@ -42,6 +42,7 @@ const userSchema = new Schema({
         }
     },
     hashedPassword: { type: String, required: true, select: false },
+    // hashedPassword: { type: String, required: true,},
     //TODO
     // bikesForSale: [{ type: ObjectId, ref: '' }],
     // likedBikes: [{ type: ObjectId, ref: '' }],
