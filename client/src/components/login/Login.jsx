@@ -2,7 +2,7 @@ import styles from './Login.module.css'
 
 import { useNavigate } from 'react-router-dom'
 import { useForm } from '../../hooks/useForm';
-import { useLogin } from '../../hooks/useAuth';
+import { useLogin } from '../../hooks/useAuthentication';
 
 
 export default function Login() {
@@ -12,6 +12,8 @@ export default function Login() {
         { email: '', password: '' },
         async ({ email, password }) => {
             try {
+                console.log(typeof login);
+
                 await login(email, password);
                 naigate('/');
             } catch (error) {
