@@ -12,11 +12,11 @@ async function registerUser(userData) {
     const user = await User.create(userData);
     const userWithoutPassword = user.toObject();
     delete userWithoutPassword.hashedPassword;
+
     const accessToken = createAccessToken(user);
-    console.log(userWithoutPassword);
 
 
-    return { user: userWithoutPassword, accessToken };
+    return Object.assign({ user: userWithoutPassword }, { accessToken })
 }
 
 
@@ -43,11 +43,10 @@ async function loginUser(email, password) {
 
     const userWithoutPassword = user.toObject();
     delete userWithoutPassword.hashedPassword;
-    console.log(userWithoutPassword);
 
     const accessToken = createAccessToken(userWithoutPassword);
 
-    return { user: userWithoutPassword, accessToken };
+    return Object.assign(userWithoutPassword, { accessToken })
 
 }
 
