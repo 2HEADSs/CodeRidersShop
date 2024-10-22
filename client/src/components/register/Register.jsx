@@ -8,7 +8,7 @@ export default function Register() {
 
                 <div className={styles.inputGroup}>
                     <label htmlFor="email">Email</label>
-                    <input type="email" id="email" equired />
+                    <input type="email" id="email" required />
                 </div>
 
                 <div className={styles.inputGroup}>
