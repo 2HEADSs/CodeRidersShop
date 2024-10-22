@@ -8,18 +8,18 @@ import styles from './Register.module.css';
 export default function Register() {
     const register = useRegister();
     const navigate = useNavigate();
-
-    const { values, changeHandler, submitHandler } = useForm(
-        { email: '', password: '', repass: '' },
-        async ({ email, password, repass }) => {
-            try {
-                await register(email, password, repass);
-                navigate('/')
-            } catch (error) {
-                console.log(error.message);
-            }
+    const initialValues = { email: '', password: '', repass: '' }
+    const registerHandler = async ({ email, password, repass }) => {
+        try {
+            await register(email, password, repass);
+            navigate('/')
+        } catch (error) {
+            console.log(error.message);
         }
-    )
+    }
+
+    const { values, changeHandler, submitHandler } = useForm(initialValues, registerHandler);
+    
     return (
         <div className={styles.registerContainer}>
             <form

@@ -7,19 +7,18 @@ import { useLogin } from '../../hooks/useAuthentication';
 
 export default function Login() {
     const login = useLogin();
-    const naigate = useNavigate();
-    const { values, changeHandler, submitHandler } = useForm(
-        { email: '', password: '' },
-        async ({ email, password }) => {
-            try {
-                await login(email, password);
-                naigate('/');
-            } catch (error) {
-                //TODO: error handling
-                console.log(error.message);
-            }
+    const navigate = useNavigate();
+    const loginHandler = async ({ email, password }) => {
+        try {
+            await login(email, password);
+            navigate('/');
+        } catch (error) {
+            //TODO: error handling
+            console.log(error.message);
         }
-    );
+    }
+    const initialValues = { email: '', password: '' };
+    const { values, changeHandler, submitHandler } = useForm(initialValues, loginHandler);
 
     return (
         <div className={styles.loginContainer}>
