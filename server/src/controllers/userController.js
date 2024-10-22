@@ -25,7 +25,7 @@ userController.post('/register', async (req, res) => {
             throw new Error('Password must be no longer than 23 characters.');
         }
 
-        if (req.body.password !== req.body.repassword) {
+        if (req.body.password !== req.body.repass) {
             throw new Error('Password and confirmation password do not match.');
         }
 

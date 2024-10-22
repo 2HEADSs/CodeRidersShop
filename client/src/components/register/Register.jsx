@@ -1,24 +1,70 @@
-import styles from './Register.module.css'; // Import the CSS module
+import { useNavigate } from 'react-router-dom';
+import { useRegister } from '../../hooks/useAuthentication';
+import { useForm } from '../../hooks/useForm';
+import styles from './Register.module.css';
+
+
 
 export default function Register() {
+    const register = useRegister();
+    const navigate = useNavigate();
+
+    const { values, changeHandler, submitHandler } = useForm(
+        { email: '', password: '', repass: '' },
+        async ({ email, password, repass }) => {
+            try {
+                await register(email, password, repass);
+                navigate('/')
+            } catch (error) {
+                console.log(error.message);
+            }
+        }
+    )
     return (
         <div className={styles.registerContainer}>
-            <form className={styles.registerForm}>
+            <form
+                className={styles.registerForm}
+                onSubmit={submitHandler}
+            >
                 <h2>Register</h2>
 
                 <div className={styles.inputGroup}>
                     <label htmlFor="email">Email</label>
-                    <input type="email" id="email" required />
+                    <input
+                        type="email"
+                        id="email"
+                        name='email'
+                        value={values.email}
+                        onChange={changeHandler}
+                        placeholder="Enter your email (e.g., you@example.com)"
+                        required
+                    />
                 </div>
 
                 <div className={styles.inputGroup}>
                     <label htmlFor="password">Password</label>
-                    <input type="password" id="password" required />
+                    <input
+                        type="password"
+                        id="password"
+                        name='password'
+                        value={values.password}
+                        onChange={changeHandler}
+                        placeholder="Enter your password"
+                        required
+                    />
                 </div>
 
                 <div className={styles.inputGroup}>
-                    <label htmlFor="confirm-password">Confirm Password</label>
-                    <input type="password" id="confirm-password" required />
+                    <label htmlFor="repass">Confirm Password</label>
+                    <input
+                        type="password"
+                        id="repass"
+                        name='repass'
+                        value={values.repass}
+                        onChange={changeHandler}
+                        placeholder="Repeat your password"
+                        required
+                    />
                 </div>
 
                 <button type="submit" className={styles.registerButton}>Register</button>
