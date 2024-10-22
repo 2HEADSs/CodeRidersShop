@@ -9,3 +9,9 @@ export const login = async (email, password) => {
 
     return userData;
 }
+
+export const register = async (email, password, repass) => {
+    const userData = await requester.post(`${BASE_URL}/register`, { email, password, repass });
+
+    return userData;
+}
