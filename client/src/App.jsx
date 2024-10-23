@@ -6,6 +6,7 @@ import Login from './components/login/Login'
 import Register from './components/register/Register'
 import Catalog from './components/catalog/Catalog'
 import User from './components/user/User'
+import BikeCreate from './components/bikeCreate/BikeCreate'
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
         <Route path='/register' element={<Register />} />
         <Route path='/catalog' element={<Catalog />} />
         <Route path='/user' element={<User />} />
+        <Route path='/addBike' element={<BikeCreate />} />
       </Routes>
     </>
   )

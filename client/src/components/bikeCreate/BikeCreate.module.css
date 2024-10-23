@@ -1,0 +1,83 @@
+.bikeFormContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+}
+
+.bikeForm {
+    border: 5px solid rgba(255, 255, 255, 0.5);
+    border-color: black;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(97, 95, 95, 0.7); 
+}
+
+h2 {
+    margin-bottom: 5%;
+    font-size: 32px;
+    color: rgba(255, 255, 255, 0.9); 
+}
+
+.inputGroup {
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.inputGroup label {
+    display: block;
+    font-size: 18px;
+    margin-bottom: 5px;
+    color: rgba(255, 255, 255, 0.9); 
+}
+
+
+.inputGroup input,
+.inputGroup select {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-sizing: border-box;
+    background: rgba(255, 255, 255, 0.7); 
+}
+
+.submitButton {
+    width: 100%;
+    padding: 12px;
+    background-color: #333;
+    color: white;
+    font-size: 18px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submitButton:hover {
+    background-color: #173905; 
+}
+
+
+.inputGroupUsed {
+    display: flex;
+    align-items: center;
+    gap: 10px; 
+    margin-bottom: 15px; 
+}
+
+.inputGroupUsed label {
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.9); 
+}
+
+.inputGroupUsed input[type="checkbox"] {
+    width: auto; 
+    margin-left: 10px;
+}
