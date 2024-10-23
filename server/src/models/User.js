@@ -42,11 +42,12 @@ const userSchema = new Schema({
         }
     },
     hashedPassword: { type: String, required: true, select: false },
-    // hashedPassword: { type: String, required: true,},
+    wishList: { type: Array, default: [], required: false }
     //TODO
     // bikesForSale: [{ type: ObjectId, ref: '' }],
-    // likedBikes: [{ type: ObjectId, ref: '' }],
     // City
+}, {
+    timestamps: true
 });
 
 userSchema.index(

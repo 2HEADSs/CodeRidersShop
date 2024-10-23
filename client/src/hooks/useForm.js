@@ -14,7 +14,7 @@ export function useForm(initialValues, submitCallback) {
 
     const submitHandler = (e) => {
         e.preventDefault();
-
+        //TODO: validate form data
         submitCallback(values)
     };
 
