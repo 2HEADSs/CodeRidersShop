@@ -1,6 +1,6 @@
 import express from 'express';
 import userController from './controllers/userController.js';
-import bikesRouter from './controllers/bikesController.js';
+import bikeController from './controllers/bikesController.js';
 
 const router = express.Router();
 
@@ -10,7 +10,7 @@ router.get('/', (req, res) => {
 });
 
 router.use('/user', userController)
-router.use('/bikes', bikesRouter)
+router.use('/bikes', bikeController)
 
 
 router.use((req, res) => {

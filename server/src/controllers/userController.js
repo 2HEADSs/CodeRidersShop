@@ -49,6 +49,7 @@ userController.post('/register', async (req, res) => {
 });
 
 userController.post('/login', async (req, res) => {
+
     try {
         const user = await loginUser(req.body.email, req.body.password);
         res.status(200);
