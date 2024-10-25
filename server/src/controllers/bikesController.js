@@ -8,6 +8,7 @@ bikeController.get('/bikes', (req, res) => {
 });
 
 bikeController.post('/create', async (req, res) => {
+
     try {
         const bikeData = {
             //TODO - Validate data before send to DB
@@ -26,7 +27,7 @@ bikeController.post('/create', async (req, res) => {
         const bike = await createBike(bikeData)
         console.log(bike);
 
-        res.status(200);
+        res.status(200).json(bike);
         res.end()
     } catch (error) {
         res.status(400).json({ error: error.message });

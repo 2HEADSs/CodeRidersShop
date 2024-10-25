@@ -75,6 +75,3 @@ bikeSchema.index(
 
 const Bike = model('Bike', bikeSchema);
 export default Bike;
-
-
-
