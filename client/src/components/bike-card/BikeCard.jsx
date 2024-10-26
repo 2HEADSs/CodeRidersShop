@@ -13,7 +13,7 @@ function BikeCard({ bike }) {
                 <p><strong>Engine Capacity:</strong> {bike.engineCapacity} cc</p>
                 <p><strong>Price:</strong> ${bike.price.toLocaleString()}</p>
                 <p><strong>Year:</strong> {bike.year}</p>
-                <p><strong>Condition:</strong> {bike.used ? "Used" : "New"}</p>
+                <p><strong>Condition:</strong> {bike.used}</p>
             </div>
         </div>
     );
