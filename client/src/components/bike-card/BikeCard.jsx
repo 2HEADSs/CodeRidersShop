@@ -2,9 +2,10 @@ import React from 'react';
 import styles from './BikeCard.module.css';
 
 function BikeCard({ bike }) {
+
     return (
         <div className={styles.bikeCard}>
-            <img src={bike.img} alt={`${bike.model}`} className={styles.bikeImage} />
+            <img src={bike?.img} alt={`${bike.model}`} className={styles.bikeImage} />
             <div className={styles.bikeInfo}>
                 <h3>{bike.model}</h3>
                 <p><strong>Manufacturer:</strong> {bike.manufacturer}</p>

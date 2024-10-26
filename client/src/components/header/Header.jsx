@@ -11,9 +11,9 @@ export default function Header() {
                 <div className={styles.navbarRightLink}>
                     <Link to="/login" className={styles.navItem}>Login</Link>
                     <Link to="/register" className={styles.navItem}>Register</Link>
-                    <Link to="/catalog" className={styles.navItem}>Bikes</Link>
+                    <Link to="/bikes" className={styles.navItem}>Bikes</Link>
                     <Link to="/user" className={styles.navItem}>User</Link>
-                    <Link to="/addBike" className={styles.navItem}>Add</Link>
+                    <Link to="/create" className={styles.navItem}>Create</Link>
                 </div>
             </nav>
         </header>

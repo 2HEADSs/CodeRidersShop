@@ -4,9 +4,9 @@ import Header from './components/header/Header'
 import Home from './components/home/Home'
 import Login from './components/login/Login'
 import Register from './components/register/Register'
-import Catalog from './components/catalog/Catalog'
+import Bikes from './components/catalog/Bikes'
 import User from './components/user/User'
-import BikeCreate from './components/bikeCreate/BikeCreate'
+import BikeCreate from './components/bike-create/BikeCreate'
 
 function App() {
 
@@ -20,9 +20,9 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
-        <Route path='/catalog' element={<Catalog />} />
+        <Route path='/bikes' element={<Bikes />} />
         <Route path='/user' element={<User />} />
-        <Route path='/addBike' element={<BikeCreate />} />
+        <Route path='/create' element={<BikeCreate />} />
       </Routes>
     </>
   )

@@ -1,6 +1,6 @@
 import React from 'react';
-import styles from './Catalog.module.css';
-import BikeCard from '../bikeCard/BikeCard.jsx';
+import styles from './Bikes.module.css';
+import BikeCard from '../bike-card/BikeCard.jsx';
 
 const motorcycleData = [
     {
@@ -136,11 +136,12 @@ const motorcycleData = [
     // Add additional motorcycle objects here
 ];
 
-function Catalog() {
+function Bikes() {
     return (
         <div className={styles.catalogContainer}>
             <h2 className={styles.catalogTitle}>Motorcycle Catalog</h2>
             <div className={styles.catalogFlex}>
+                {/* TODO: change indes with id from server */}
                 {motorcycleData.map((bike, index) => (
                     <BikeCard key={index} bike={bike} />
                 ))}
@@ -149,4 +150,4 @@ function Catalog() {
     );
 }
 
-export default Catalog;
+export default Bikes;
