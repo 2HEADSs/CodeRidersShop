@@ -6,8 +6,11 @@ async function createBike(requsetBody) {
     return Bike.create(requsetBody)
 }
 
-async function getAllBikes(params) {
+async function getAllBikes() {
     return Bike.find({});
 }
 
-export { createBike, getAllBikes }
+async function getById(id) {
+    return Bike.findById(id)
+}
+export { createBike, getAllBikes, getById }

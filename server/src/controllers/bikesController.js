@@ -1,5 +1,5 @@
 import express from 'express';
-import { createBike, getAllBikes } from '../services/bikeService.js';
+import { createBike, getAllBikes, getById } from '../services/bikeService.js';
 const bikeController = express.Router();
 
 
@@ -7,6 +7,18 @@ bikeController.get('/', async (req, res) => {
     try {
         const allBikes = await getAllBikes();
         res.status(200).json(allBikes);
+        res.end();
+    } catch (error) {
+        console.log(error.message);
+
+    }
+});
+
+bikeController.get('/:id', async (req, res) => {
+
+    try {
+        const bike = await getById(req.params.id);
+        res.status(200).json(bike);
         res.end();
     } catch (error) {
         console.log(error.message);
