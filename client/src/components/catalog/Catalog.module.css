@@ -1,0 +1,18 @@
+.catalogContainer {
+    padding: 20px;
+    text-align: center;
+    color: white;
+}
+
+.catalogTitle {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.catalogFlex {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    padding: 20px;
+}

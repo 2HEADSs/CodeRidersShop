@@ -102,7 +102,7 @@
     "11": {
         "model": "Shadow Spirit 750",
         "manufacturer": "Honda",
-        "color": "Military Green",
+        "color": "Black",
         "engineCapacity": 745,
         "price": 8500,
         "year": 2021,
@@ -112,12 +112,12 @@
     "12": {
         "model": "Gold Wing",
         "manufacturer": "Honda",
-        "color": "Silver",
+        "color": "Military Green",
         "engineCapacity": 1833,
         "price": 23000,
         "year": 2023,
         "used": "false",
-        "img": "https://example.com/gold-wing.jpg"
+        "img": "https://imgd.aeplcdn.com/1280x720/n/cw/ec/158873/goldwing-tour-right-front-three-quarter.gif?isig=0"
     },
     "13": {
         "model": "Dragstar 650",
