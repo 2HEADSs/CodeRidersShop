@@ -22,6 +22,7 @@ const manufacturers = [
     'Voltago', 'Voxan', 'WMI', 'Yamaha', 'Zero', 'Zhongyu', 'Zontes', 'Zündapp', 'Other'
 ];
 
+//TODO: Description/details
 const bikeSchema = new Schema({
     model: {
         type: String,
