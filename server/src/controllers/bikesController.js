@@ -1,5 +1,5 @@
 import express from 'express';
-import { createBike } from '../services/bikeService.js';
+import { createBike, getAllBikes } from '../services/bikeService.js';
 const bikeController = express.Router();
 
 
@@ -28,6 +28,18 @@ bikeController.post('/create', async (req, res) => {
         console.log(bike);
 
         res.status(200).json(bike);
+        res.end()
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+
+    }
+});
+
+
+bikeController.get('/', async (req, res) => {
+    try {
+        const allBikes = await getAllBikes();
+        res.status(200).json(allBikes);
         res.end()
     } catch (error) {
         res.status(400).json({ error: error.message });
