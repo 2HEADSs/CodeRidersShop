@@ -13,4 +13,12 @@ async function getAllBikes() {
 async function getById(id) {
     return Bike.findById(id)
 }
-export { createBike, getAllBikes, getById }
+
+async function lastFourAdded() {
+    return Bike.find({})
+        .sort({ createdAr: -1 })
+        .limit(4);
+}
+
+
+export { createBike, getAllBikes, getById, lastFourAdded }

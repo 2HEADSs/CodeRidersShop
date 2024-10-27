@@ -1,7 +1,9 @@
+import Bikes from "../catalog/Bikes.jsx";
+
 export default function Home() {
     return (
         <>
-            <h1 color="black">Home</h1>
+            <Bikes lastFourAdded={true}></Bikes>
         </>
     );
 }

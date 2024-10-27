@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styles from './Bikes.module.css';
 import BikeCard from '../bike-card/BikeCard.jsx';
-import { getAllBikes } from '../../api/bike-api.js';
+import { getAllBikes, getLastAdded } from '../../api/bike-api.js';
 
 // const motorcycleData = [
 //     {
@@ -137,23 +137,34 @@ import { getAllBikes } from '../../api/bike-api.js';
 //     // Add additional motorcycle objects here
 // ];
 
-function Bikes() {
+function Bikes({ lastFourAdded }) {
+    console.log(lastFourAdded == true);
+
     // const [bikes, setBikes] = useState(motorcycleData);
     const [bikes, setBikes] = useState([]);
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         (async () => {
-            const result = await getAllBikes();
+            let result;
+            if (lastFourAdded) {
+                result = await getLastAdded();
+            } else {
+                result = await getAllBikes();
+
+            }
             setLoading(false)
             setBikes(result)
         })()
-    }, []);
+    }, [lastFourAdded]);
 
     return (
         <div className={styles.catalogContainer}>
             {/* TODO: change style of h2 and h3 */}
-            <h2 className={styles.catalogTitle}>Motorcycle Catalog</h2>
+            {lastFourAdded
+                ? <h2 className={styles.catalogTitle}>Last added motorcyles</h2>
+                : <h2 className={styles.catalogTitle}>Motorcycle Catalog</h2>
+            }
             {/* TODO: add propper loading component */}
             {loading && <h1>Loading....</h1>}
             {bikes.length > 0

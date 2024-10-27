@@ -16,7 +16,6 @@ function App() {
     //be hidden when scroling
     <>
       <Header />
-      <h1>Test Heading</h1>
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/login' element={<Login />} />

@@ -9,6 +9,13 @@ const getAllBikes = async () => {
     return result;
 };
 
+const getLastAdded = async () => {
+
+    const result = await requester.get(`${BASE_URL}/lastAdded`);
+
+    return result;
+};
+
 
 const getOne = async (bikeId) => {
 
@@ -20,5 +27,6 @@ const getOne = async (bikeId) => {
 
 export {
     getAllBikes,
-    getOne
+    getOne,
+    getLastAdded
 }
