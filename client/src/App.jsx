@@ -4,7 +4,7 @@ import Header from './components/header/Header'
 import Home from './components/home/Home'
 import Login from './components/login/Login'
 import Register from './components/register/Register'
-import Bikes from './components/catalog/Bikes'
+import BikeList from './components/catalog/BikeList'
 import User from './components/user/User'
 import BikeCreate from './components/bike-create/BikeCreate'
 import BikeDetails from './components/bike-details/BikeDetails'
@@ -20,7 +20,7 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
-        <Route path='/bikes' element={<Bikes />} />
+        <Route path='/bikes' element={<BikeList />} />
         <Route path='/bikes/:bikeId/details' element={<BikeDetails />} />
         <Route path='/user' element={<User />} />
         <Route path='/create' element={<BikeCreate />} />

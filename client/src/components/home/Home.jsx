@@ -1,4 +1,4 @@
-import Bikes from "../catalog/Bikes.jsx";
+import Bikes from "../catalog/BikeList.jsx";
 
 export default function Home() {
     return (

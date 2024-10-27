@@ -137,7 +137,7 @@ import { getAllBikes, getLastAdded } from '../../api/bike-api.js';
 //     // Add additional motorcycle objects here
 // ];
 
-function Bikes({ lastFourAdded }) {
+function BikeList({ lastFourAdded }) {
     console.log(lastFourAdded == true);
 
     // const [bikes, setBikes] = useState(motorcycleData);
@@ -180,4 +180,4 @@ function Bikes({ lastFourAdded }) {
     );
 }
 
-export default Bikes;
+export default BikeList;
