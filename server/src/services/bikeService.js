@@ -16,7 +16,7 @@ async function getById(id) {
 
 async function lastFourAdded() {
     return Bike.find({})
-        .sort({ createdAr: -1 })
+        .sort({ createdAt: -1 })
         .limit(4);
 }
 
