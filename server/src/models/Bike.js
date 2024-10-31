@@ -59,7 +59,12 @@ const bikeSchema = new Schema({
         type: String,
         //TOTO: validate/ real img
     },
-    _ownerId: { type: ObjectId, ref: 'User', required: true },
+    description: {
+        type: String,
+        required: true,
+        default: "Random Description"
+    },
+    owner: { type: ObjectId, ref: 'User', required: true },
 }, {
     timestamps: true
 });
