@@ -13,7 +13,7 @@ function BikeDetails() {
             const result = await getOne(bikeId);
             setBike(result)
         })()
-    })
+    },[])
 
     return (
         <div className={styles.bikeDetails}>
