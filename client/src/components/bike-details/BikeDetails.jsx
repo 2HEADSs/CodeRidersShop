@@ -13,7 +13,7 @@ function BikeDetails() {
             const result = await getOne(bikeId);
             setBike(result)
         })()
-    },[])
+    }, [])
 
     return (
         <div className={styles.bikeDetails}>
@@ -27,6 +27,7 @@ function BikeDetails() {
                 <p><strong>Year:</strong> {bike.year}</p>
                 <p><strong>Condition:</strong> {bike.used ? 'Used' : 'New'}</p>
                 <p><strong>Description:</strong> {bike.description || "No additional details available."}</p>
+                <p><strong>Contacts:</strong> {bike.owner.email}</p>
 
             </div>
         </div>

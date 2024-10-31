@@ -11,7 +11,7 @@ async function getAllBikes() {
 }
 
 async function getById(id) {
-    return Bike.findById(id)
+    return await Bike.findById(id).populate("owner", "email -_id");
 }
 
 async function lastFourAdded() {
