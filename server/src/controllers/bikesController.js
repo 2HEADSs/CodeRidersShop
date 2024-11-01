@@ -51,7 +51,8 @@ bikeController.post('/create', async (req, res) => {
             year: req.body.year ? req.body.year : '',
             used: req.body.used ? req.body.used : '',
             img: req.body.img ? req.body.img : '',
-            _ownerId: req.requesterId
+            description: req.body.description ? req.body.description : '',
+            owner: req.requesterId
 
 
         }
