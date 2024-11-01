@@ -20,7 +20,6 @@ const getLastAdded = async () => {
 const getOne = async (bikeId) => {
 
     const result = await requester.get(`${BASE_URL}/${bikeId}`);
-    console.log(result);
 
     return result;
 };
