@@ -1,9 +1,9 @@
-import Bikes from "../catalog/BikeList.jsx";
+import BikeList from "../catalog/BikeList.jsx";
 
 export default function Home() {
     return (
         <>
-            <Bikes lastFourAdded={true}></Bikes>
+            <BikeList lastFourAdded={true}></BikeList>
         </>
     );
 }

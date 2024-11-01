@@ -1,19 +1,11 @@
 
-import { useEffect, useState } from 'react';
 import styles from './BikeDetails.module.css';
-import { getOne } from '../../api/bike-api';
 import { useParams } from 'react-router-dom';
+import { useGetOneBike } from '../../hooks/useBikesData';
 
 function BikeDetails() {
-    const [bike, setBike] = useState({ owner: {} });
     const { bikeId } = useParams();
-
-    useEffect(() => {
-        (async () => {
-            const result = await getOne(bikeId);
-            setBike(result)
-        })()
-    }, [])
+    const [bike] = useGetOneBike(bikeId)
 
     return (
         <div className={styles.bikeDetails}>

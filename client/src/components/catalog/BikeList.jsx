@@ -1,11 +1,11 @@
 import styles from './Bikes.module.css';
 import BikeCard from '../bike-card/BikeCard.jsx';
-import useGetNeededBikes from '../../hooks/useBikes.js';
+import { useGetNeededBikes } from '../../hooks/useBikesData.js';
 
 
 export default function BikeList({ lastFourAdded }) {
 
-    const [bikes, loading] = useGetNeededBikes(lastFourAdded);
+    const [bikes, loading] = useGetNeededBikes(lastFourAdded)
 
     return (
         <div className={styles.catalogContainer}>
