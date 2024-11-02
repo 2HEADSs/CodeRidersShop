@@ -6,9 +6,6 @@ export const useLogin = () => {
         //TODO: SESSION TO STATE
         localStorage.clear();
         localStorage.setItem("user", JSON.stringify(result));
-
-        console.log(result);
-
     }
     return loginHandler;
 }
@@ -19,9 +16,6 @@ export const useRegister = () => {
         //TODO: SESSION TO STATE
         localStorage.clear();
         localStorage.setItem("user", JSON.stringify(result));
-
-        console.log(result);
-
     }
     return registerHandler;
 }
