@@ -12,6 +12,8 @@ async function registerUser(userData) {
     const user = await User.create(userData);
     const userWithoutPassword = user.toObject();
     delete userWithoutPassword.hashedPassword;
+    delete userWithoutPassword.wishList;
+    delete userWithoutPassword["__v"];
 
     const accessToken = createAccessToken(user);
 
@@ -43,6 +45,8 @@ async function loginUser(email, password) {
 
     const userWithoutPassword = user.toObject();
     delete userWithoutPassword.hashedPassword;
+    delete userWithoutPassword.wishList;
+    delete userWithoutPassword["__v"];
 
     const accessToken = createAccessToken(userWithoutPassword);
 
