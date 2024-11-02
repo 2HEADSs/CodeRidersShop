@@ -39,6 +39,8 @@ bikeController.get('/:id', async (req, res) => {
 });
 
 bikeController.post('/create', async (req, res) => {
+    console.log(req.body);
+
 
     try {
         const bikeData = {

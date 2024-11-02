@@ -1,5 +1,7 @@
 import React from 'react';
 import styles from './BikeCreate.module.css';
+import { useForm } from '../../hooks/useForm';
+import { useCreateBike } from '../../hooks/useBikesData';
 
 const manufacturers = [
     'Access Motor', 'Adly', 'Aeon', 'AGM MOTORS', 'Aixam', 'American Ironhorse', 'Aprilia',
@@ -22,22 +24,39 @@ const manufacturers = [
     'Voltago', 'Voxan', 'WMI', 'Yamaha', 'Zero', 'Zhongyu', 'Zontes', 'Zündapp', 'Other'
 ];
 
-const BikeCreate = () => {
-    const initialBikeData = {
-        model: '',
-        manufacturer: '',
-        color: '',
-        engineCapacity: '',
-        price: '',
-        year: '',
-        used: false,
-        img: ''
-    };
+const initialValues = {
+    model: '',
+    manufacturer: '',
+    color: '',
+    engineCapacity: '',
+    price: '',
+    year: '',
+    used: false,
+    img: '',
+    description: ''
+};
+export default function BikeCreate() {
+
+
+    const createHandler = async (values) => {
+        try {
+            await useCreateBike(values);
+        } catch (error) {
+            console.log(error.message);
+
+        }
+
+    }
+
+    const { values, changeHandler, submitHandler } = useForm(initialValues, createHandler)
 
 
     return (
         <div className={styles.bikeFormContainer}>
-            <form className={styles.bikeForm}>
+            <form
+                className={styles.bikeForm}
+                onSubmit={submitHandler}
+            >
                 <h2>Create a New Bike</h2>
 
                 <div className={styles.inputGroup}>
@@ -46,7 +65,8 @@ const BikeCreate = () => {
                         type="text"
                         id="model"
                         name="model"
-                        value={initialBikeData.model}
+                        onChange={changeHandler}
+                        value={values.model}
                         required
                     />
                 </div>
@@ -56,7 +76,8 @@ const BikeCreate = () => {
                     <select
                         id="manufacturer"
                         name="manufacturer"
-                        value={initialBikeData.manufacturer}
+                        onChange={changeHandler}
+                        value={values.manufacturer}
                         required
                     >
                         <option value="">Select a manufacturer</option>
@@ -72,7 +93,8 @@ const BikeCreate = () => {
                         type="text"
                         id="color"
                         name="color"
-                        value={initialBikeData.color}
+                        onChange={changeHandler}
+                        value={values.color}
                         required
                     />
                 </div>
@@ -83,7 +105,8 @@ const BikeCreate = () => {
                         type="number"
                         id="engineCapacity"
                         name="engineCapacity"
-                        value={initialBikeData.engineCapacity}
+                        onChange={changeHandler}
+                        value={values.engineCapacity}
                         required
                     />
                 </div>
@@ -94,7 +117,8 @@ const BikeCreate = () => {
                         type="number"
                         id="price"
                         name="price"
-                        value={initialBikeData.price}
+                        onChange={changeHandler}
+                        value={values.price}
                         required
                     />
                 </div>
@@ -105,7 +129,8 @@ const BikeCreate = () => {
                         type="number"
                         id="year"
                         name="year"
-                        value={initialBikeData.year}
+                        onChange={changeHandler}
+                        value={values.year}
                         min="1885"
                         max="2024"
                         required
@@ -120,7 +145,8 @@ const BikeCreate = () => {
                         type="text"
                         id="img"
                         name="img"
-                        value={initialBikeData.img}
+                        onChange={changeHandler}
+                        value={values.img}
                     />
                 </div>
 
@@ -130,7 +156,18 @@ const BikeCreate = () => {
                         type="checkbox"
                         id="used"
                         name="used"
-                        checked={initialBikeData.used}
+                        onChange={changeHandler}
+                        checked={values.used}
+                    />
+                </div>
+                <div className={styles.inputGroup}>
+                    <label htmlFor="description">Description</label>
+                    <textarea
+                        id="description"
+                        name="description"
+                        onChange={changeHandler}
+                        value={values.description}
+                        rows="4"
                     />
                 </div>
 
@@ -140,4 +177,3 @@ const BikeCreate = () => {
     );
 };
 
-export default BikeCreate;
