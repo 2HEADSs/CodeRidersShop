@@ -4,11 +4,11 @@ import { useForm } from '../../hooks/useForm';
 import styles from './Register.module.css';
 
 
+const initialValues = { email: '', password: '', repass: '' }
 
 export default function Register() {
     const register = useRegister();
     const navigate = useNavigate();
-    const initialValues = { email: '', password: '', repass: '' }
     const registerHandler = async ({ email, password, repass }) => {
         try {
             await register(email, password, repass);
@@ -19,7 +19,7 @@ export default function Register() {
     }
 
     const { values, changeHandler, submitHandler } = useForm(initialValues, registerHandler);
-    
+
     return (
         <div className={styles.registerContainer}>
             <form

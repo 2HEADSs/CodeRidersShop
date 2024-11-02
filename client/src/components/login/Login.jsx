@@ -5,6 +5,7 @@ import { useForm } from '../../hooks/useForm';
 import { useLogin } from '../../hooks/useAuthentication';
 
 
+const initialValues = { email: '', password: '' };
 export default function Login() {
     const login = useLogin();
     const navigate = useNavigate();
@@ -17,7 +18,6 @@ export default function Login() {
             console.log(error.message);
         }
     }
-    const initialValues = { email: '', password: '' };
     const { values, changeHandler, submitHandler } = useForm(initialValues, loginHandler);
 
     return (
