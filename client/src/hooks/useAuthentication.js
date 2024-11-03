@@ -10,7 +10,8 @@ export const useLogin = () => {
         //TODO: SESSION TO STATE
         localStorage.clear();
         localStorage.setItem("user", JSON.stringify(result));
-        changeAuthState(result)
+        changeAuthState(result);
+        return result;
     }
     return loginHandler;
 }
@@ -23,7 +24,8 @@ export const useRegister = () => {
         //TODO: SESSION TO STATE
         localStorage.clear();
         localStorage.setItem("user", JSON.stringify(result));
-        changeAuthState(result)
+        changeAuthState(result);
+        return result;
 
     }
     return registerHandler;
