@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './BikeCreate.module.css';
 import { useForm } from '../../hooks/useForm';
 import { useCreateBike } from '../../hooks/useBikesData';
+import { useNavigate } from 'react-router-dom';
 
 const manufacturers = [
     'Access Motor', 'Adly', 'Aeon', 'AGM MOTORS', 'Aixam', 'American Ironhorse', 'Aprilia',
@@ -36,20 +37,21 @@ const initialValues = {
     description: ''
 };
 export default function BikeCreate() {
-
+    const navigate = useNavigate();
 
     const createHandler = async (values) => {
         try {
-            await useCreateBike(values);
+            const { _id: gamrId } = await useCreateBike(values);
+            //TODO:NAVIGATION
+            navigate(`/bikes/${gamrId}/details`);
+            //http://localhost:5173/bikes/671bfab47b5ce405b474c077/details
         } catch (error) {
+            //TODO: setErrorState
             console.log(error.message);
-
         }
+    };
 
-    }
-
-    const { values, changeHandler, submitHandler } = useForm(initialValues, createHandler)
-
+    const { values, changeHandler, submitHandler } = useForm(initialValues, createHandler);
 
     return (
         <div className={styles.bikeFormContainer}>

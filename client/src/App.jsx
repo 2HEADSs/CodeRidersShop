@@ -14,7 +14,10 @@ import { AuthContext } from './contexts/authContext'
 function App() {
   const [authState, setAuthState] = useState({});
   const changeAuthState = (state) => {
-    //can validate
+    console.log(state);
+
+    // localStorage.clear();
+    localStorage.setItem('user', JSON.stringify(state))
     setAuthState(state)
   }
 

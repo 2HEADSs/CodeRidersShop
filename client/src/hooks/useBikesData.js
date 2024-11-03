@@ -27,7 +27,7 @@ export function useGetNeededBikes(lastFourAdded) {
     }, [lastFourAdded]);
 
     return [bikes, loading, serverError];
-}
+};
 
 
 export function useGetOneBike(bikeId) {
@@ -41,20 +41,14 @@ export function useGetOneBike(bikeId) {
         })()
     }, [bikeId])
     return [bike];
-}
+};
 
 export async function useCreateBike(bikeData) {
     // console.log(bikeData + "useCreateBike");
     const result = await create(bikeData);
-    console.log(JSON.stringify(bikeData) + "from hook");
-    console.log("useBikeData.js");
-
-    console.log(result);
-
-
     return result
 
-}
+};
 
 // export const useCreateBike = () => {
 //     const createHandler = async (bikedata) => {
