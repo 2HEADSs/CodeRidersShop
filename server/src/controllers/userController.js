@@ -37,12 +37,10 @@ userController.post('/register', async (req, res) => {
             hashedPassword: await bcrypt.hash(req.body.password, 10),
         }
 
-        const user = await registerUser(userData)
-        res.status(200);
-        res.send(user);
-        res.end();
+        const user = await registerUser(userData);
+        res.status(200).json(user);
     } catch (error) {
-        res.status(400).json({ error: error.message });
+        res.status(400).json({ message: error.message });
 
     }
 
@@ -52,11 +50,9 @@ userController.post('/login', async (req, res) => {
 
     try {
         const user = await loginUser(req.body.email, req.body.password);
-        res.status(200);
-        res.send(user);
-        res.end();
+        res.status(200).json(user);
     } catch (error) {
-        res.status(400).json({ error: error.message });
+        res.status(400).json({ message: error.message });
     }
 })
 
