@@ -5,7 +5,7 @@ import { useGetNeededBikes } from '../../hooks/useBikesData.js';
 
 export default function BikeList({ lastFourAdded }) {
 
-    const [bikes, loading] = useGetNeededBikes(lastFourAdded)
+    const [bikes, loading, serverError] = useGetNeededBikes(lastFourAdded)
 
     return (
         <div className={styles.catalogContainer}>
@@ -16,7 +16,7 @@ export default function BikeList({ lastFourAdded }) {
             }
             {/* TODO: add propper loading component */}
             {loading && <h1>Loading....</h1>}
-            {bikes.length > 0
+            {bikes.length > 0 && !serverError
                 ? <div className={styles.catalogFlex}>
                     {bikes.map((bike) => (
                         <BikeCard key={bike._id} bike={bike} />
@@ -24,6 +24,8 @@ export default function BikeList({ lastFourAdded }) {
                 </div>
                 : <h3>No motorcyles yet!</h3>
             }
+            {serverError &&
+                <p className={styles.errorMessage}>{serverError}</p>}
         </div>
     );
 }

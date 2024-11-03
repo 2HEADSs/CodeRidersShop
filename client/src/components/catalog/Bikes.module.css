@@ -16,3 +16,12 @@
     justify-content: center;
     padding: 20px;
 }
+
+.errorMessage {
+    color: #0c0a0a;
+    font-size: 1.4rem;
+    margin-top: 20px;
+    font-weight: bold;
+    text-align: center;
+    background-color: red;
+}

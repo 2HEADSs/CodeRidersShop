@@ -5,23 +5,29 @@ import { create, getAllBikes, getLastAdded, getOne } from '../api/bike-api';
 export function useGetNeededBikes(lastFourAdded) {
 
     const [bikes, setBikes] = useState([]);
-    const [loading, setLoading] = useState(true)
+    const [loading, setLoading] = useState(true);
+    const [serverError, setServerError] = useState("")
 
     useEffect(() => {
         (async () => {
-            let result;
-            if (lastFourAdded) {
-                result = await getLastAdded();
-            } else {
-                result = await getAllBikes();
-
+            let result = [];
+            try {
+                if (lastFourAdded) {
+                    result = await getLastAdded();
+                } else {
+                    result = await getAllBikes();
+                }
+            } catch (error) {
+                console.log(error.message);
+                setServerError(error.message)
             }
+
             setLoading(false)
-            setBikes(result)
+            setBikes(result);
         })()
     }, [lastFourAdded]);
 
-    return [bikes, loading];
+    return [bikes, loading, serverError];
 }
 
 
@@ -39,11 +45,13 @@ export function useGetOneBike(bikeId) {
 }
 
 export async function useCreateBike(bikeData) {
-    console.log(bikeData + "useCreateBike");
-
+    // console.log(bikeData + "useCreateBike");
     const result = await create(bikeData);
     console.log(JSON.stringify(bikeData) + "from hook");
+    console.log("useBikeData.js");
+
     console.log(result);
+
 
     return result
 

@@ -21,7 +21,7 @@ bikeController.get('/', async (req, res) => {
         res.status(200).json(allBikes);
         res.end();
     } catch (error) {
-        console.log(error.message);
+        res.status(400).json({ message: "An error ocured in server!" });
 
     }
 });
@@ -33,13 +33,13 @@ bikeController.get('/:id', async (req, res) => {
         res.status(200).json(bike);
         res.end();
     } catch (error) {
-        console.log(error.message);
+        res.status(400).json({ message: error.message });
 
     }
 });
 
 bikeController.post('/create', async (req, res) => {
-    console.log(req.body);
+    console.log(req.body + "req.body");
 
 
     try {
@@ -64,22 +64,11 @@ bikeController.post('/create', async (req, res) => {
         res.status(200).json(bike);
         res.end()
     } catch (error) {
-        res.status(400).json({ error: error.message });
+        res.status(400).json({ message: error.message });
 
     }
 });
 
-
-bikeController.get('/', async (req, res) => {
-    try {
-        const allBikes = await getAllBikes();
-        res.status(200).json(allBikes);
-        res.end()
-    } catch (error) {
-        res.status(400).json({ error: error.message });
-
-    }
-})
 
 
 
