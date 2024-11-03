@@ -14,8 +14,7 @@ import { AuthContext } from './contexts/authContext'
 function App() {
   const [authState, setAuthState] = useState({});
   const changeAuthState = (state) => {
-
-    //cam validate
+    //can validate
     setAuthState(state)
   }
 

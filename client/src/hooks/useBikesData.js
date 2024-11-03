@@ -18,7 +18,6 @@ export function useGetNeededBikes(lastFourAdded) {
                     result = await getAllBikes();
                 }
             } catch (error) {
-                console.log(error.message);
                 setServerError(error.message)
             }
 

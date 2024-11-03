@@ -5,6 +5,7 @@ import { AuthContext } from '../../contexts/authContext';
 
 export default function Header() {
     const { isAuthenticated } = useContext(AuthContext)
+
     return (
         <header className={styles.header}>
             <nav className={styles.navbar}>
@@ -12,9 +13,9 @@ export default function Header() {
                     <Link to="/" className={styles.navItem}>Home</Link>
                 </div>
                 <div className={styles.navbarRightLink}>
-                    {!isAuthenticated
+                    < Link to="/bikes" className={styles.navItem}>Bikes</Link>
+                    {isAuthenticated
                         ? <>
-                            <Link to="/bikes" className={styles.navItem}>Bikes</Link>
                             <Link to="/create" className={styles.navItem}>Add Bike</Link>
                             <Link to="/user" className={styles.navItem}>User</Link>
                             <Link to="/logout" className={styles.navItem}>Logout</Link>
@@ -28,6 +29,6 @@ export default function Header() {
 
                 </div>
             </nav>
-        </header>
+        </header >
     );
 }
