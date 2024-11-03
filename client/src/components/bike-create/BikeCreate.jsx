@@ -44,7 +44,6 @@ export default function BikeCreate() {
             const { _id: gamrId } = await useCreateBike(values);
             //TODO:NAVIGATION
             navigate(`/bikes/${gamrId}/details`);
-            //http://localhost:5173/bikes/671bfab47b5ce405b474c077/details
         } catch (error) {
             //TODO: setErrorState
             console.log(error.message);

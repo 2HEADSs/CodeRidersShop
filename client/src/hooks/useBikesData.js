@@ -32,15 +32,30 @@ export function useGetNeededBikes(lastFourAdded) {
 
 export function useGetOneBike(bikeId) {
     const [bike, setBike] = useState({ owner: {} });
+    const [error, setError] = useState('')
 
 
     useEffect(() => {
         (async () => {
-            const result = await getOne(bikeId);
-            setBike(result)
+            let result = [];
+
+            try {
+                result = await getOne(bikeId);
+                if (result !== null) {
+                    setBike(result);
+                    setError('');
+                } else {
+                    setError('Bike do not exist.');
+                    setBike([])
+                }
+            } catch (error) {
+                setError(error)
+            }
+
+
         })()
     }, [bikeId])
-    return [bike];
+    return [bike, error];
 };
 
 export async function useCreateBike(bikeData) {
