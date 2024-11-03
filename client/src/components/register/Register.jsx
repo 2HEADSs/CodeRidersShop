@@ -12,12 +12,17 @@ export default function Register() {
     const register = useRegister();
     const navigate = useNavigate();
     const registerHandler = async ({ email, password, repass }) => {
+        if (password !== repass) {
+            return setError('Password missmatch!');
+        }
+
         try {
             await register(email, password, repass);
-            navigate('/')
+            setError('');
+            navigate('/');
         } catch (error) {
             console.log(error.message);
-            setError(error.message)
+            setError(error.message);
         }
     }
 
