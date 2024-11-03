@@ -2,11 +2,13 @@ import { useNavigate } from 'react-router-dom';
 import { useRegister } from '../../hooks/useAuthentication';
 import { useForm } from '../../hooks/useForm';
 import styles from './Register.module.css';
+import { useState } from 'react';
 
 
 const initialValues = { email: '', password: '', repass: '' }
 
 export default function Register() {
+    const [error, setError] = useState('');
     const register = useRegister();
     const navigate = useNavigate();
     const registerHandler = async ({ email, password, repass }) => {
@@ -15,6 +17,7 @@ export default function Register() {
             navigate('/')
         } catch (error) {
             console.log(error.message);
+            setError(error.message)
         }
     }
 
@@ -66,6 +69,8 @@ export default function Register() {
                         required
                     />
                 </div>
+
+                {error && (<p>{error}</p>)}
 
                 <button type="submit" className={styles.registerButton}>Register</button>
 
