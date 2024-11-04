@@ -13,7 +13,7 @@ function BikeDetails() {
             {error && (<p>{error}</p>)}
             {!bike && (<p>Loading bike details...</p>)}
             {!error &&
-            //TODO: add better condition
+            //TODO: add better condition for empty bike array and errors
                 (<div className={styles.bikeDetails}>
                     <img src={bike.img} alt={`${bike.model}`} className={styles.bikeImage} />
                     <div className={styles.bikeInfo}>
@@ -27,7 +27,6 @@ function BikeDetails() {
                         <p><strong>Description:</strong> {bike.description || "No additional details available."}</p>
                         <p><strong>Contact with owner:</strong> {bike.owner.email}</p>
                         <p><strong>Created:</strong> {formatCreatedAt(bike.createdAt)}</p>
-
                     </div>
                 </div>)
             }
