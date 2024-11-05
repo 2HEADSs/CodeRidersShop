@@ -1,10 +1,9 @@
 import { Link } from 'react-router-dom';
 import styles from './Header.module.css';
-import { useContext } from 'react';
-import { AuthContext } from '../../contexts/authContext';
+import { useAuthContext } from '../../contexts/authContext';
 
 export default function Header() {
-    const { isAuthenticated } = useContext(AuthContext)
+    const { isAuthenticated } = useAuthContext()
 
     return (
         <header className={styles.header}>
