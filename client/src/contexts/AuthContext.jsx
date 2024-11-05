@@ -1,15 +1,15 @@
 import { createContext, useContext, useState } from "react";
+import usePersistedState from "../hooks/usePersistedState";
 
 export const AuthContext = createContext();
 
 export function AuthContextProvider(props) {
-    const [authState, setAuthState] = useState({});
+    // const [authState, setAuthState] = useState({});
+    const [authState, setAuthState] = usePersistedState('user', {});
 
     const changeAuthState = (state) => {
         console.log(state);
 
-        // localStorage.clear();
-        localStorage.setItem('user', JSON.stringify(state))
         setAuthState(state)
     };
 
