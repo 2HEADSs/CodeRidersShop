@@ -4,7 +4,6 @@ import usePersistedState from "../hooks/usePersistedState";
 export const AuthContext = createContext();
 
 export function AuthContextProvider(props) {
-    // const [authState, setAuthState] = useState({});
     const [authState, setAuthState] = usePersistedState('user', {});
 
     const changeAuthState = (state) => {
@@ -13,10 +12,15 @@ export function AuthContextProvider(props) {
         setAuthState(state)
     };
 
+    const logout = () => {
+        setAuthState(false);
+    }
+
     const contextData = {
-        accessToken: authState.accessToken,
-        isAuthenticated: !!authState.accessToken,
-        changeAuthState
+        accessToken: authState?.accessToken,
+        isAuthenticated: !!authState?.accessToken,
+        changeAuthState,
+        logout,
     };
 
     return (

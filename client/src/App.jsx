@@ -8,7 +8,8 @@ import BikeList from './components/catalog/BikeList';
 import User from './components/user/User';
 import BikeCreate from './components/bike-create/BikeCreate';
 import BikeDetails from './components/bike-details/BikeDetails';
-import { AuthContextProvider } from './contexts/authContext';
+import { AuthContextProvider } from './contexts/AuthContext';
+import Logout from './components/logout/Logout';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path='/bikes/:bikeId/details' element={<BikeDetails />} />
           <Route path='/user' element={<User />} />
           <Route path='/create' element={<BikeCreate />} />
+          <Route path='/logout' element={< Logout />} />
         </Routes>
       </AuthContextProvider >
     </>
