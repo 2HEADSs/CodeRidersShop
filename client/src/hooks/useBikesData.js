@@ -62,8 +62,15 @@ export async function useCreateBike(bikeData) {
     // console.log(bikeData + "useCreateBike");
     const result = await create(bikeData);
     return result
-
 };
+
+
+export async function useEditBike(bikeData) {
+    // console.log(bikeData + "useCreateBike");
+    const result = await create(bikeData);
+    return result
+};
+
 
 // export const useCreateBike = () => {
 //     const createHandler = async (bikedata) => {

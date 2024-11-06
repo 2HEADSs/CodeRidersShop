@@ -12,7 +12,11 @@ function BikeCard({ bike }) {
                 <p><strong>Price:</strong> ${bike.price.toLocaleString()}</p>
                 <p><strong>Year:</strong> {bike.year}</p>
                 <p><strong></strong> {bike.used == "true" ? 'Used' : 'New'}</p>
-                <Link to={`/bikes/${bike._id}/details`} className={styles.bikeLink}>Details</Link>
+                <div className={styles.bikeLinksButtons}>
+                    <Link to={`/bikes/${bike._id}/details`} className={styles.bikeLink}>Details</Link>
+                    <Link to={`/bikes/${bike._id}/details`} className={styles.bikeLink}>Wish List</Link>
+                    <Link to={`/bikes/${bike._id}/edit`} className={styles.bikeLink}>Edit</Link>
+                </div>
             </div>
         </div>
     );

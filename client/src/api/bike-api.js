@@ -11,8 +11,6 @@ const getAllBikes = async () => {
     // } catch (error) {
     //     return error
     // }
-
-
 };
 
 const getLastAdded = async () => {
@@ -31,9 +29,15 @@ const create = async (bikeData) => {
     return result
 };
 
+const edit = async (bikeData) => {
+    const result = await requester.post(`${BASE_URL}/edit`, bikeData);
+    return result
+};
+
 export {
     getAllBikes,
     getOne,
     getLastAdded,
-    create
+    create,
+    edit
 }
