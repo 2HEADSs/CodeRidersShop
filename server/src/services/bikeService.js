@@ -6,6 +6,10 @@ async function createBike(requsetBody) {
     return Bike.create(requsetBody)
 }
 
+async function editBike(requsetBody) {
+    return Bike.create(requsetBody)
+}
+
 async function getAllBikes() {
     return Bike.find({});
 }
@@ -21,4 +25,4 @@ async function lastFourAdded() {
 }
 
 
-export { createBike, getAllBikes, getById, lastFourAdded }
+export { createBike, getAllBikes, getById, lastFourAdded, editBike }
