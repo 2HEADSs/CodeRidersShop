@@ -53,8 +53,6 @@ bikeController.post('/create', async (req, res) => {
             img: req.body.img ? req.body.img : '',
             description: req.body.description ? req.body.description : '',
             owner: req.requesterId
-
-
         }
         const bike = await createBike(bikeData)
 
@@ -67,11 +65,24 @@ bikeController.post('/create', async (req, res) => {
 });
 
 
-bikeController.put('/edit', async (req, res) => {
+bikeController.put('/:id/edit', async (req, res) => {
 
     try {
+        if (Object.keys(req.body).length === 0) {
+            throw new Error('Request body is empty');
+        }
 
+        const bikeIdFormParams = req.params.id;
+        const bikeIdFromBody = req.body._id;
+        if (!bikeIdFormParams && !bikeIdFromBody) {
+            throw new Error('ID is missing from the request!')
+        }
+        const bike = await getById(bikeIdFormParams);
         console.log(req.body);
+        
+        
+
+
         res.end()
     } catch (error) {
         res.status(400).json({ message: error.message });

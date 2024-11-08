@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { create, getAllBikes, getLastAdded, getOne } from '../api/bike-api';
+import { create, edit, getAllBikes, getLastAdded, getOne } from '../api/bike-api';
 
 
 export function useGetNeededBikes(lastFourAdded) {
@@ -31,7 +31,8 @@ export function useGetNeededBikes(lastFourAdded) {
 
 
 export function useGetOneBike(bikeId) {
-    const [bike, setBike] = useState({ owner: {} });
+    //todo: remove owner
+    const [bike, setBike] = useState({});
     const [error, setError] = useState('')
 
 
@@ -59,16 +60,14 @@ export function useGetOneBike(bikeId) {
 };
 
 export async function useCreateBike(bikeData) {
-    // console.log(bikeData + "useCreateBike");
     const result = await create(bikeData);
-    return result
+    return result;
 };
 
 
 export async function useEditBike(bikeData) {
-    // console.log(bikeData + "useCreateBike");
-    const result = await create(bikeData);
-    return result
+    const result = await edit(bikeData);
+    return result;
 };
 
 

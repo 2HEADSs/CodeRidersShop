@@ -3,8 +3,7 @@ import requester from "./requester";
 const BASE_URL = 'http://localhost:3000/bikes';
 
 const getAllBikes = async () => {
-    const result = await requester.get(BASE_URL);
-    return result;
+    return await requester.get(BASE_URL);
     // try {
     //     const result = await requester.get(BASE_URL);
     //     return result;
@@ -14,24 +13,24 @@ const getAllBikes = async () => {
 };
 
 const getLastAdded = async () => {
-    const result = await requester.get(`${BASE_URL}/lastAdded`);
-    return result;
+    return await requester.get(`${BASE_URL}/lastAdded`);
 };
 
 
 const getOne = async (bikeId) => {
-    const result = await requester.get(`${BASE_URL}/${bikeId}`);
-    return result;
+    return await requester.get(`${BASE_URL}/${bikeId}`);
+
 };
 
 const create = async (bikeData) => {
-    const result = await requester.post(`${BASE_URL}/create`, bikeData);
-    return result
+    return await requester.post(`${BASE_URL}/create`, bikeData);
 };
 
 const edit = async (bikeData) => {
-    const result = await requester.post(`${BASE_URL}/edit`, bikeData);
-    return result
+    console.log(bikeData);
+    const bikeId = bikeData._id;
+
+    return await requester.put(`${BASE_URL}/${bikeId}/edit`, bikeData);
 };
 
 export {

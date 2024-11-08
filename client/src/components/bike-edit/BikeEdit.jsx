@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './BikeEdit.module.css';
 import { useForm } from '../../hooks/useForm';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -25,40 +25,40 @@ const manufacturers = [
     'Voltago', 'Voxan', 'WMI', 'Yamaha', 'Zero', 'Zhongyu', 'Zontes', 'Zündapp', 'Other'
 ];
 
-const initialValues = {
-    model: '',
-    manufacturer: '',
-    color: '',
-    engineCapacity: '',
-    price: '',
-    year: '',
-    used: false,
-    img: '',
-    description: ''
-};
-
-
 export default function BikeEdit() {
-    const navigate = useNavigate();
     const { bikeId } = useParams();
-    const [bike, error] = useGetOneBike(bikeId);
-
+    const navigate = useNavigate();
+    const [bike, getOneBikeError] = useGetOneBike(bikeId);
+    const [loading, setLoading] = useState(true);
     //TODO: Error handling
-    const createHandler = async (values) => {
+
+    const editHandler = async (bike) => {
         try {
-            const { _id: gamrId } = await useEditBike(values);
+            const { _id: gameId, ...bikeData } = await useEditBike(bike);
             //TODO:NAVIGATION
-            navigate(`/bikes/${gamrId}/details`);
+            navigate(`/bikes/${gameId}/details`);
         } catch (error) {
-            //TODO: setErrorState
             console.log(error.message);
         }
     };
 
-    const { changeHandler, submitHandler } = useForm(initialValues, createHandler);
+    const { values, changeHandler, submitHandler, setValues } = useForm(
+        bike,
+        editHandler
+    );
+
+    useEffect(() => {
+        if (bike) {
+            setValues(bike);
+            setLoading(false)
+        }
+    }, [bike, setValues]);
+
+    if (loading) return <div>Loading...</div>;
+    if (getOneBikeError) return <div>Error loading bike data!</div>;
 
     return (
-        <div className={styles.bikeFormContainer}>
+        < div className={styles.bikeFormContainer} >
             <form
                 className={styles.bikeForm}
                 onSubmit={submitHandler}
@@ -68,12 +68,14 @@ export default function BikeEdit() {
                 <div className={styles.inputGroup}>
                     <label htmlFor="model">Model</label>
                     <input
+                        // defaultValue={bike.model}
                         type="text"
                         id="model"
                         name="model"
                         onChange={changeHandler}
-                        value={bike?.model || ''}
-                        required
+                        value={values.model || ''}
+                    // placeholder={bike.model}
+                    // required
                     />
                 </div>
 
@@ -83,7 +85,7 @@ export default function BikeEdit() {
                         id="manufacturer"
                         name="manufacturer"
                         onChange={changeHandler}
-                        value={bike?.manufacturer || ''}
+                        value={values.manufacturer || ''}
                         required
                     >
                         <option value="">Select a manufacturer</option>
@@ -100,7 +102,7 @@ export default function BikeEdit() {
                         id="color"
                         name="color"
                         onChange={changeHandler}
-                        value={bike?.color || ''}
+                        value={values.color || ''}
                         required
                     />
                 </div>
@@ -112,7 +114,7 @@ export default function BikeEdit() {
                         id="engineCapacity"
                         name="engineCapacity"
                         onChange={changeHandler}
-                        value={bike?.engineCapacity || ''}
+                        value={values.engineCapacity || ''}
                         required
                     />
                 </div>
@@ -124,7 +126,7 @@ export default function BikeEdit() {
                         id="price"
                         name="price"
                         onChange={changeHandler}
-                        value={bike?.price || ''}
+                        value={values.price || ''}
                         required
                     />
                 </div>
@@ -136,14 +138,12 @@ export default function BikeEdit() {
                         id="year"
                         name="year"
                         onChange={changeHandler}
-                        value={bike?.year || ''}
+                        value={values.year || ''}
                         min="1885"
                         max="2024"
                         required
                     />
                 </div>
-
-
 
                 <div className={styles.inputGroup}>
                     <label htmlFor="img">Image URL</label>
@@ -152,7 +152,7 @@ export default function BikeEdit() {
                         id="img"
                         name="img"
                         onChange={changeHandler}
-                        value={bike?.img || ''}
+                        value={values.img || ''}
                     />
                 </div>
 
@@ -163,7 +163,7 @@ export default function BikeEdit() {
                         id="used"
                         name="used"
                         onChange={changeHandler}
-                        checked={bike?.used === 'true'}
+                        checked={values.used || false}
                     />
                 </div>
                 <div className={styles.inputGroup}>
@@ -172,13 +172,13 @@ export default function BikeEdit() {
                         id="description"
                         name="description"
                         onChange={changeHandler}
-                        value={bike?.description || ''}
+                        value={values.description || ''}
                         rows="4"
                     />
                 </div>
 
-                <button type="submit" className={styles.submitButton}>Create Bike</button>
+                <button type="submit" className={styles.submitButton}>Edit Bike</button>
             </form>
-        </div>
+        </div >
     );
 };

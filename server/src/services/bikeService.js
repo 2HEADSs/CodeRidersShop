@@ -7,6 +7,7 @@ async function createBike(requsetBody) {
 }
 
 async function editBike(requsetBody) {
+    //todo: change implementation
     return Bike.create(requsetBody)
 }
 
@@ -15,7 +16,9 @@ async function getAllBikes() {
 }
 
 async function getById(id) {
-    return await Bike.findById(id).populate("owner", "email -_id");
+    return await Bike.findById(id);
+
+    // return await Bike.findById(id).populate("owner", "email");
 }
 
 async function lastFourAdded() {
