@@ -11,7 +11,7 @@ function BikeCard({ bike }) {
                 <p><strong>Engine Capacity:</strong> {bike.engineCapacity} cc</p>
                 <p><strong>Price:</strong> ${bike.price.toLocaleString()}</p>
                 <p><strong>Year:</strong> {bike.year}</p>
-                <p><strong></strong> {bike.used == "true" ? 'Used' : 'New'}</p>
+                <p><strong></strong> {bike.used == true ? 'Used' : 'New'}</p>
                 <div className={styles.bikeLinksButtons}>
                     <Link to={`/bikes/${bike._id}/details`} className={styles.bikeLink}>Details</Link>
                 </div>

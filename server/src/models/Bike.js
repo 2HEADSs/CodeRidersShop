@@ -52,7 +52,7 @@ const bikeSchema = new Schema({
         max: [2024, 'We are still in 2024!!!']
     },
     used: {
-        type: String,
+        type: Boolean,
         require: true
     },
     img: {

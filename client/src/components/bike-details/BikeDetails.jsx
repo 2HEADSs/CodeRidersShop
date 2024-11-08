@@ -11,6 +11,7 @@ function BikeDetails() {
     const { ...userData } = useAuthContext();
     const ownerId = bike.owner._id;
     const currentUser = userData?.userId;
+    
 
     return (
         <>
@@ -27,7 +28,7 @@ function BikeDetails() {
                         <p><strong>Engine Capacity:</strong> {bike.engineCapacity} cc</p>
                         <p><strong>Price:</strong> ${bike.price?.toLocaleString()}</p>
                         <p><strong>Year:</strong> {bike.year}</p>
-                        <p><strong>Condition:</strong> {bike.used == "true" ? 'Used' : 'New'}</p>
+                        <p><strong>Condition:</strong> {bike.used == true ? 'Used' : 'New'}</p>
                         <p><strong>Description:</strong> {bike.description || "No additional details available."}</p>
                         <p><strong>Contact with owner:</strong> {bike.owner.email}</p>
                         <p><strong>Created:</strong> {formatCreatedAt(bike.createdAt)}</p>
