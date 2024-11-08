@@ -49,3 +49,36 @@
 .backLink:hover {
     background-color: #1c86e3;
 }
+
+
+.bikeLinksButtons {
+    display: flex;
+    justify-content: space-around;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.bikeLink {
+    display: inline-block;
+    padding: 12px 12px;
+    /* Increased padding for a larger button */
+    font-size: 1rem;
+    /* Slightly larger font size */
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+    background: linear-gradient(135deg, #2b2b2c, #4e4e4f);
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    text-align: center;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+}
+
+.bikeLink:hover {
+    background: linear-gradient(135deg, #4e4e4f, #000000);
+    transform: scale(1.05);
+    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.4);
+    color: #f1f1f1;
+    text-decoration: none;
+}

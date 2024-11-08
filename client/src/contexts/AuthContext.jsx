@@ -19,6 +19,7 @@ export function AuthContextProvider(props) {
     const contextData = {
         accessToken: authState?.accessToken,
         isAuthenticated: !!authState?.accessToken,
+        userId: authState?._id,
         changeAuthState,
         logout,
     };
@@ -33,7 +34,6 @@ export function AuthContextProvider(props) {
 
 export function useAuthContext() {
     const authData = useContext(AuthContext);
-
     return authData;
 
 }

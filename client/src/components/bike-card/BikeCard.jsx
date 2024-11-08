@@ -14,8 +14,6 @@ function BikeCard({ bike }) {
                 <p><strong></strong> {bike.used == "true" ? 'Used' : 'New'}</p>
                 <div className={styles.bikeLinksButtons}>
                     <Link to={`/bikes/${bike._id}/details`} className={styles.bikeLink}>Details</Link>
-                    <Link to={`/bikes/${bike._id}/details`} className={styles.bikeLink}>Wish List</Link>
-                    <Link to={`/bikes/${bike._id}/edit`} className={styles.bikeLink}>Edit</Link>
                 </div>
             </div>
         </div>
