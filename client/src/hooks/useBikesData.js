@@ -56,14 +56,30 @@ export function useGetOneBike(bikeId) {
 
         })()
     }, [bikeId])
-    return [bike,loading, serverError,];
+    return [bike, loading, serverError,];
 };
 
-export async function useCreateBike(bikeData) {
+export function useCreateBike() {
+    const [newBike, setNewBike] = useState(null);
+    const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(false);
 
-    return await create(bikeData);
 
-};
+    const createBike = async (bikeData) => {
+        setLoading(true);
+        setError(null);
+        try {
+            const bikeResult = await create(bikeData);
+            setNewBike(bikeResult);
+        } catch (error) {
+            setError(error.message);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    return { newBike, error, loading, createBike };
+}
 
 
 export async function useEditBike(bikeData) {
