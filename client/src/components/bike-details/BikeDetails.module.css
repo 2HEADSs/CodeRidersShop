@@ -61,9 +61,7 @@
 .bikeLink {
     display: inline-block;
     padding: 12px 12px;
-    /* Increased padding for a larger button */
     font-size: 1rem;
-    /* Slightly larger font size */
     font-weight: bold;
     color: white;
     text-decoration: none;
