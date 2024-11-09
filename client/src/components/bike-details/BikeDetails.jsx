@@ -7,20 +7,19 @@ import { useAuthContext } from '../../contexts/AuthContext';
 
 function BikeDetails() {
     const { bikeId } = useParams();
-    const [bike, error] = useGetOneBike(bikeId);
+    const [bike, loading, error] = useGetOneBike(bikeId);
     const { userId, ...data } = useAuthContext();
-
 
     return (
         <>
-            {error && (<p>{error}</p>)}
-            {!bike && (<p>Loading bike details...</p>)}
-            {!error &&
+            {loading && (<p>Loading bike details...</p>)}
+            {error && (<p>{error.message}</p>)}
+            {(!error && Object.entries(bike).length > 0) &&
                 //TODO: add better condition for empty bike array and errors
                 (<div className={styles.bikeDetails}>
                     <img src={bike.img} alt={`${bike.model}`} className={styles.bikeImage} />
                     <div className={styles.bikeInfo}>
-                        <h2>{bike?.model}</h2>
+                        <h2>Model: {bike?.model}</h2>
                         <p><strong>Manufacturer:</strong> {bike.manufacturer}</p>
                         <p><strong>Color:</strong> {bike.color}</p>
                         <p><strong>Engine Capacity:</strong> {bike.engineCapacity} cc</p>

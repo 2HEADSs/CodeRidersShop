@@ -3,10 +3,10 @@ import { create, edit, getAllBikes, getLastAdded, getOne } from '../api/bike-api
 
 
 export function useGetNeededBikes(lastFourAdded) {
-
     const [bikes, setBikes] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [serverError, setServerError] = useState("")
+    const [serverError, setServerError] = useState("");
+
 
     useEffect(() => {
         (async () => {
@@ -31,32 +31,32 @@ export function useGetNeededBikes(lastFourAdded) {
 
 
 export function useGetOneBike(bikeId) {
-    //todo: remove owner
     const [bike, setBike] = useState({});
-    const [error, setError] = useState('')
+    const [loading, setLoading] = useState(true);
+    const [serverError, setServerError] = useState('');
 
 
     useEffect(() => {
         (async () => {
             let result = [];
-
             try {
                 result = await getOne(bikeId);
                 if (result !== null) {
                     setBike(result);
-                    setError('');
+                    setServerError('');
                 } else {
-                    setError('Bike do not exist.');
+                    setServerError('Bike do not exist.');
                     setBike([])
                 }
             } catch (error) {
-                setError(error)
+                setServerError(error)
             }
+            setLoading(false);
 
 
         })()
     }, [bikeId])
-    return [bike, error];
+    return [bike,loading, serverError,];
 };
 
 export async function useCreateBike(bikeData) {
