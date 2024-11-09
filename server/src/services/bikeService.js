@@ -3,16 +3,15 @@ import Bike from "../models/Bike.js";
 
 
 async function createBike(requsetBody) {
-    return Bike.create(requsetBody)
+    return await Bike.create(requsetBody)
 }
 
 async function editBike(requsetBody) {
-    //todo: change implementation
-    return Bike.create(requsetBody)
+    return await Bike.findByIdAndUpdate(requsetBody._id, requsetBody);
 }
 
 async function getAllBikes() {
-    return Bike.find({});
+    return await Bike.find({});
 }
 
 async function getById(id) {

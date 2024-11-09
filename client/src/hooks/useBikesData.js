@@ -60,14 +60,14 @@ export function useGetOneBike(bikeId) {
 };
 
 export async function useCreateBike(bikeData) {
-    const result = await create(bikeData);
-    return result;
+
+    return await create(bikeData);
+
 };
 
 
 export async function useEditBike(bikeData) {
-    const result = await edit(bikeData);
-    return result;
+    return await edit(bikeData);
 };
 
 

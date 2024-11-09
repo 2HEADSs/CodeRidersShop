@@ -49,7 +49,7 @@ bikeController.post('/create', async (req, res) => {
             engineCapacity: req.body.engineCapacity ? req.body.engineCapacity : '',
             price: req.body.price ? req.body.price : '',
             year: req.body.year ? req.body.year : '',
-            used: req.body.used ? req.body.used : '',
+            used: req.body.used ? req.body.used : false,
             img: req.body.img ? req.body.img : '',
             description: req.body.description ? req.body.description : '',
             owner: req.requesterId
@@ -77,14 +77,14 @@ bikeController.put('/:id/edit', async (req, res) => {
         if (!bikeIdFormParams && !bikeIdFromBody) {
             throw new Error('ID is missing from the request!')
         }
-        const bike = await getById(bikeIdFormParams);
-        console.log(req.body);
-        
-        
-
-
+        if (req.body.used == '') {
+            req.body.used = false
+        }
+        const bike = await editBike(req.body);
+        res.status(200).json(bike);
         res.end()
     } catch (error) {
+        console.log(error);
         res.status(400).json({ message: error.message });
 
     }
