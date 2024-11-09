@@ -20,6 +20,7 @@ export function AuthContextProvider(props) {
         accessToken: authState?.accessToken,
         isAuthenticated: !!authState?.accessToken,
         userId: authState?._id,
+        userEmail: authState.email,
         changeAuthState,
         logout,
     };

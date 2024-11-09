@@ -28,7 +28,7 @@ function BikeDetails() {
                         <p><strong>Year:</strong> {bike.year}</p>
                         <p><strong>Condition:</strong> {bike.used == true ? 'Used' : 'New'}</p>
                         <p><strong>Description:</strong> {bike.description || "No additional details available."}</p>
-                        <p><strong>Contact with owner:</strong> {bike.owner?.email}</p>
+                        <p><strong>Contact with owner:</strong> {data.userEmail}</p>
                         <p><strong>Created:</strong> {formatCreatedAt(bike.createdAt)}</p>
                         {userId &&
                             <div className={styles.bikeLinksButtons}>
