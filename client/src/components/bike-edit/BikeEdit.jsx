@@ -24,38 +24,32 @@ const manufacturers = [
     'Thunderbike', 'TiSTO', 'TM', 'Triton', 'Triumph', 'TRS', 'UM', 'Ural', 'Vespa', 'VICTORY', 'VOGE',
     'Voltago', 'Voxan', 'WMI', 'Yamaha', 'Zero', 'Zhongyu', 'Zontes', 'Zündapp', 'Other'
 ];
-
+const initialValues = {};
 export default function BikeEdit() {
     const { bikeId } = useParams();
+    const [loadingEdit, setLoadingEdit] = useState(false)
     const navigate = useNavigate();
-    const [initialBikeData, getOneBikeError] = useGetOneBike(bikeId);
-    const { editedBike, error, loading, editBike } = useEditBike();
+    const [initialBikeData, loadingFromGetBike, getOneBikeError] = useGetOneBike(bikeId);
 
     //TODO: Error handling
 
     const editHandler = async () => {
-        await editBike(values);
-        if (error) {
+        setLoadingEdit(true)
+        try {
+            const result = await useEditBike(values);
+            setLoadingEdit(false)
+            navigate(`/bikes/${result._id}/details`);
+        } catch (error) {
+            setLoadingEdit(false)
             console.log(error);
-        }
-        if (!error && !loading) {
-            navigate(`/bikes/${values._id}/details`);
         }
     };
 
-    const { values, changeHandler, submitHandler, setValues } = useForm(
-        initialBikeData,
+    const { values, changeHandler, submitHandler } = useForm(
+        Object.assign(initialValues, initialBikeData),
         editHandler
     );
-
-    useEffect(() => {
-        if (initialBikeData) {
-            setValues(initialBikeData);
-            // setLoading(false)
-        }
-    }, [initialBikeData, setValues]);
-
-    if (loading) return <div>Loading...</div>;
+    if (loadingFromGetBike || loadingEdit) return <div>Loading...</div>;
     if (getOneBikeError) return <div>Error loading bike data!</div>;
 
     return (

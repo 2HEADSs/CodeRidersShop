@@ -38,13 +38,12 @@ const initialValues = {
 };
 export default function BikeCreate() {
     const navigate = useNavigate();
-    const { newBike, error, loading, createBike } = useCreateBike();
+    const [newBike, error, loading, createBike] = useCreateBike();
 
     const createHandler = async (values) => {
-        await createBike(values);
+        const bikeResult =  await createBike(values);
         if (newBike && !loading) {
-            console.log(newBike);
-            navigate(`/bikes/${newBike._id}/details`);
+            navigate(`/bikes/${bikeResult._id}/details`);
         }
         if (error) {
             console.log(error);

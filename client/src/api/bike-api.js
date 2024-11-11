@@ -27,9 +27,7 @@ const create = async (bikeData) => {
 };
 
 const edit = async (bikeData) => {
-    console.log(bikeData);
     const bikeId = bikeData._id;
-
     return await requester.put(`${BASE_URL}/${bikeId}/edit`, bikeData);
 };
 
