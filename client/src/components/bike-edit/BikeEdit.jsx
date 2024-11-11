@@ -24,7 +24,17 @@ const manufacturers = [
     'Thunderbike', 'TiSTO', 'TM', 'Triton', 'Triumph', 'TRS', 'UM', 'Ural', 'Vespa', 'VICTORY', 'VOGE',
     'Voltago', 'Voxan', 'WMI', 'Yamaha', 'Zero', 'Zhongyu', 'Zontes', 'Zündapp', 'Other'
 ];
-const initialValues = {};
+const initialValues = {
+    model: '',
+    manufacturer: '',
+    color: '',
+    engineCapacity: '',
+    price: '',
+    year: '',
+    used: false,
+    img: '',
+    description: ''
+};
 export default function BikeEdit() {
     const { bikeId } = useParams();
     const [loadingEdit, setLoadingEdit] = useState(false)
