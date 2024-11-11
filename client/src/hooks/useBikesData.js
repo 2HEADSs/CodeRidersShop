@@ -82,8 +82,26 @@ export function useCreateBike() {
 }
 
 
-export async function useEditBike(bikeData) {
-    return await edit(bikeData);
+export function useEditBike() {
+    const [editedBike, setEditedBike] = useState(null);
+    const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(false);
+
+    const editBike = async (bikeData) => {
+        setLoading(true);
+        setError(null);
+        try {
+            const bike = await edit(bikeData);
+            setEditedBike(bike);
+        } catch (error) {
+            setError(error)
+        } finally {
+            setLoading(false);
+        }
+
+    };
+
+    return { editedBike, error, loading, editBike }
 };
 
 

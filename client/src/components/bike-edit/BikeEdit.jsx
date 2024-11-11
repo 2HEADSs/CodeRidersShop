@@ -28,31 +28,32 @@ const manufacturers = [
 export default function BikeEdit() {
     const { bikeId } = useParams();
     const navigate = useNavigate();
-    const [bike, getOneBikeError] = useGetOneBike(bikeId);
-    const [loading, setLoading] = useState(true);
+    const [initialBikeData, getOneBikeError] = useGetOneBike(bikeId);
+    const { editedBike, error, loading, editBike } = useEditBike();
+
     //TODO: Error handling
 
-    const editHandler = async (bike) => {
-        try {
-            const { _id: gameId, ...bikeData } = await useEditBike(bike);
-            //TODO:NAVIGATION
-            navigate(`/bikes/${gameId}/details`);
-        } catch (error) {
-            console.log(error.message);
+    const editHandler = async () => {
+        await editBike(values);
+        if (error) {
+            console.log(error);
+        }
+        if (!error && !loading) {
+            navigate(`/bikes/${values._id}/details`);
         }
     };
 
     const { values, changeHandler, submitHandler, setValues } = useForm(
-        bike,
+        initialBikeData,
         editHandler
     );
 
     useEffect(() => {
-        if (bike) {
-            setValues(bike);
-            setLoading(false)
+        if (initialBikeData) {
+            setValues(initialBikeData);
+            // setLoading(false)
         }
-    }, [bike, setValues]);
+    }, [initialBikeData, setValues]);
 
     if (loading) return <div>Loading...</div>;
     if (getOneBikeError) return <div>Error loading bike data!</div>;
@@ -74,8 +75,7 @@ export default function BikeEdit() {
                         name="model"
                         onChange={changeHandler}
                         value={values.model || ''}
-                    // placeholder={bike.model}
-                    // required
+                        required
                     />
                 </div>
 
