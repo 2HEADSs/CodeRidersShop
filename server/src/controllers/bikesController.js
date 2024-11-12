@@ -71,6 +71,7 @@ bikeController.put('/:id/edit', async (req, res) => {
         if (Object.keys(req.body).length === 0) {
             throw new Error('Request body is empty');
         }
+        console.log(typeof req.body.price);
 
         const bikeIdFormParams = req.params.id;
         const bikeIdFromBody = req.body._id;
@@ -84,8 +85,14 @@ bikeController.put('/:id/edit', async (req, res) => {
         res.status(200).json(bike);
         res.end()
     } catch (error) {
-        console.log(error);
-        res.status(400).json({ message: error.message });
+        console.log(error.name);
+        if (error.name === 'ValidationError') {
+            const mongoValidationError = Object.values(error.errors)[0].message;
+            res.status(400).json({ message: mongoValidationError });
+        } else {
+            res.status(400).json({ message: error.message });
+
+        }
 
     }
 });

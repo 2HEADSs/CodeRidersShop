@@ -92,7 +92,7 @@ export async function useEditBike(bikeData) {
         return bike;
     } catch (error) {
         console.log(error);
-        return error
+        throw error
     }
 }
 

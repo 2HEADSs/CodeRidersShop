@@ -7,7 +7,7 @@ async function createBike(requsetBody) {
 }
 
 async function editBike(requsetBody) {
-    return await Bike.findByIdAndUpdate(requsetBody._id, requsetBody);
+    return await Bike.findByIdAndUpdate(requsetBody._id, requsetBody, { runValidators: true });
 }
 
 async function getAllBikes() {

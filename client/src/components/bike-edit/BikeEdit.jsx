@@ -37,7 +37,8 @@ const initialValues = {
 };
 export default function BikeEdit() {
     const { bikeId } = useParams();
-    const [loadingEdit, setLoadingEdit] = useState(false)
+    const [loadingEdit, setLoadingEdit] = useState(false);
+    const [errorFromEdit, setErrorFromEdit] = useState('');
     const navigate = useNavigate();
     const [initialBikeData, loadingFromGetBike, getOneBikeError] = useGetOneBike(bikeId);
 
@@ -51,7 +52,7 @@ export default function BikeEdit() {
             navigate(`/bikes/${result._id}/details`);
         } catch (error) {
             setLoadingEdit(false)
-            console.log(error);
+            setErrorFromEdit(error)
         }
     };
 
@@ -61,6 +62,7 @@ export default function BikeEdit() {
     );
     if (loadingFromGetBike || loadingEdit) return <div>Loading...</div>;
     if (getOneBikeError) return <div>Error loading bike data!</div>;
+    if (errorFromEdit) return <div>{errorFromEdit.message}</div>;
 
     return (
         < div className={styles.bikeFormContainer} >

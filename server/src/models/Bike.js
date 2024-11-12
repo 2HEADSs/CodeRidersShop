@@ -39,11 +39,13 @@ const bikeSchema = new Schema({
     },
     engineCapacity: {
         type: Number,
-        required: true
+        required: true,
+        min: [0, 'The engine capacity cannot be a negative number.'],
     },
     price: {
         type: Number,
-        required: true
+        required: true,
+        min: [0, 'The price cannot be a negative number.'],
     },
     year: {
         type: Number,
