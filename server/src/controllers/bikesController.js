@@ -1,5 +1,5 @@
 import express from 'express';
-import { createBike, editBike, getAllBikes, getById, lastFourAdded } from '../services/bikeService.js';
+import { createBike, deleteById, editBike, getAllBikes, getById, lastFourAdded } from '../services/bikeService.js';
 const bikeController = express.Router();
 
 
@@ -8,7 +8,6 @@ bikeController.get('/lastAdded', async (req, res) => {
     try {
         const lastAdded = await lastFourAdded();
         res.status(200).json(lastAdded);
-        res.end();
     } catch (error) {
         console.log(error.message);
 
@@ -19,7 +18,6 @@ bikeController.get('/', async (req, res) => {
     try {
         const allBikes = await getAllBikes();
         res.status(200).json(allBikes);
-        res.end();
     } catch (error) {
         res.status(400).json({ message: "An error ocured in server!" });
 
@@ -31,8 +29,23 @@ bikeController.get('/:id', async (req, res) => {
     try {
         const bike = await getById(req.params.id);
         res.status(200).json(bike);
-        res.end();
     } catch (error) {
+        res.status(400).json({ message: error.message });
+
+    }
+});
+
+
+bikeController.delete('/:id', async (req, res) => {
+
+    try {
+        console.log(req.params.id + "req params");
+
+        await deleteById(req.params.id);
+        res.status(200).json({ message: 'Bike deleted successfully' });
+    } catch (error) {
+        console.log(error);
+
         res.status(400).json({ message: error.message });
 
     }

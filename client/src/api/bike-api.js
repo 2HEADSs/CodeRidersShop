@@ -31,10 +31,14 @@ const edit = async (bikeData) => {
     return await requester.put(`${BASE_URL}/${bikeId}/edit`, bikeData);
 };
 
+const remove = async (bikeId) => requester.del(`${BASE_URL}/${bikeId}`)
+
+
 export {
     getAllBikes,
     getOne,
     getLastAdded,
     create,
-    edit
+    edit,
+    remove
 }

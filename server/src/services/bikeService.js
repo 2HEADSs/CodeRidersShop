@@ -26,5 +26,21 @@ async function lastFourAdded() {
         .limit(4);
 }
 
+async function deleteById(_id) {
+    try {
+        console.log(_id);
 
-export { createBike, getAllBikes, getById, lastFourAdded, editBike }
+        const result = await Bike.deleteOne({ _id });
+        if (result.deletedCount === 0) {
+            throw new Error('No document found with that ID');
+        }
+        return result;
+    } catch (error) {
+        console.log('Error - deleting bike: bikeService' + error);
+        throw error;
+    }
+
+
+}
+
+export { createBike, getAllBikes, getById, lastFourAdded, editBike, deleteById }

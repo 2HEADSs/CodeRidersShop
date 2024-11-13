@@ -36,10 +36,11 @@ const initialValues = {
     description: ''
 };
 export default function BikeEdit() {
+    const navigate = useNavigate();
+
     const { bikeId } = useParams();
     const [loadingEdit, setLoadingEdit] = useState(false);
     const [errorFromEdit, setErrorFromEdit] = useState('');
-    const navigate = useNavigate();
     const [initialBikeData, loadingFromGetBike, getOneBikeError] = useGetOneBike(bikeId);
 
     //TODO: Error handling
@@ -47,6 +48,7 @@ export default function BikeEdit() {
     const editHandler = async () => {
         setLoadingEdit(true)
         try {
+            //todo: to use directly bike.api instead of useEditBike
             const result = await useEditBike(values);
             setLoadingEdit(false)
             navigate(`/bikes/${result._id}/details`);

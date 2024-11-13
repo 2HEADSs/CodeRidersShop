@@ -1,14 +1,32 @@
 
 import styles from './BikeDetails.module.css';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useGetOneBike } from '../../hooks/useBikesData';
 import { Link } from 'react-router-dom';
 import { useAuthContext } from '../../contexts/AuthContext';
+import { remove } from '../../api/bike-api';
 
 function BikeDetails() {
+    const navigate = useNavigate();
+
     const { bikeId } = useParams();
     const [bike, loading, error] = useGetOneBike(bikeId);
     const { userId, ...data } = useAuthContext();
+
+    const bikeDeleteHandler = async () => {
+
+        const isConfirm = confirm(`Are you sure you want to delete ${bike.model} bike?`);
+        if (!isConfirm) {
+            return
+        }
+        try {
+            await remove(bikeId);
+            navigate(`/`);
+        } catch (error) {
+            console.log(error);
+
+        }
+    };
 
     return (
         <>
@@ -32,7 +50,11 @@ function BikeDetails() {
                         {userId &&
                             <div className={styles.bikeLinksButtons}>
                                 {bike?.owner == userId
-                                    ? <Link to={`/bikes/${bike._id}/edit`} className={styles.bikeLink}>Edit</Link>
+                                    ?
+                                    <>
+                                        <Link to={`/bikes/${bike._id}/edit`} className={styles.bikeLink}>Edit</Link>
+                                        <Link to={'#'} onClick={bikeDeleteHandler} className={styles.bikeLink}>Delete</Link>
+                                    </>
                                     : <Link to={`/bikes/${bike._id}/details`} className={styles.bikeLink}>Wish List</Link>
                                 }
                             </div>
