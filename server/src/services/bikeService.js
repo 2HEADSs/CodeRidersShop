@@ -28,8 +28,6 @@ async function lastFourAdded() {
 
 async function deleteById(_id) {
     try {
-        console.log(_id);
-
         const result = await Bike.deleteOne({ _id });
         if (result.deletedCount === 0) {
             throw new Error('No document found with that ID');

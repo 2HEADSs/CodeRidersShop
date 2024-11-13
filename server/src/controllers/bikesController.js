@@ -39,8 +39,6 @@ bikeController.get('/:id', async (req, res) => {
 bikeController.delete('/:id', async (req, res) => {
 
     try {
-        console.log(req.params.id + "req params");
-
         await deleteById(req.params.id);
         res.status(200).json({ message: 'Bike deleted successfully' });
     } catch (error) {

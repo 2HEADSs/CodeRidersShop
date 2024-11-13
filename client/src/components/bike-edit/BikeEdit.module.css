@@ -81,3 +81,25 @@ h2 {
     width: auto;
     margin-left: 10px;
 }
+
+
+.loadingMessage,
+.errorMessage {
+    width: 50%;
+    margin: 20px auto;
+    padding: 15px;
+    text-align: center;
+    font-size: 18px;
+    border-radius: 8px;
+    color: #fff;
+}
+
+.loadingMessage {
+    background-color: rgba(33, 150, 243, 0.8);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.errorMessage {
+    background-color: rgba(244, 67, 54, 0.8);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}

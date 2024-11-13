@@ -86,16 +86,6 @@ export function useCreateBike() {
 }
 
 
-export async function useEditBike(bikeData) {
-    try {
-        const bike = await edit(bikeData);
-        return bike;
-    } catch (error) {
-        console.log(error);
-        throw error
-    }
-}
-
 // export const useCreateBike = () => {
 //     const createHandler = async (bikedata) => {
 //         const result = await create(bikedata);

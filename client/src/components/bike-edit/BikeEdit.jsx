@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styles from './BikeEdit.module.css';
 import { useForm } from '../../hooks/useForm';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useEditBike, useGetOneBike } from '../../hooks/useBikesData';
+import { useGetOneBike } from '../../hooks/useBikesData';
+import { edit } from '../../api/bike-api';
 
 const manufacturers = [
     'Access Motor', 'Adly', 'Aeon', 'AGM MOTORS', 'Aixam', 'American Ironhorse', 'Aprilia',
@@ -48,8 +49,7 @@ export default function BikeEdit() {
     const editHandler = async () => {
         setLoadingEdit(true)
         try {
-            //todo: to use directly bike.api instead of useEditBike
-            const result = await useEditBike(values);
+            const result = await edit(values);
             setLoadingEdit(false)
             navigate(`/bikes/${result._id}/details`);
         } catch (error) {
@@ -62,9 +62,10 @@ export default function BikeEdit() {
         Object.assign(initialValues, initialBikeData),
         editHandler
     );
-    if (loadingFromGetBike || loadingEdit) return <div>Loading...</div>;
-    if (getOneBikeError) return <div>Error loading bike data!</div>;
-    if (errorFromEdit) return <div>{errorFromEdit.message}</div>;
+    //todo: use this error and loading for other components
+    if (loadingFromGetBike || loadingEdit) return <div className={styles.loadingMessage}>Loading...</div>;
+    if (getOneBikeError) return <div className={styles.errorMessage}>Error loading bike data!</div>;
+    if (errorFromEdit) return <div className={styles.errorMessage}>{errorFromEdit.message}</div>;
 
     return (
         < div className={styles.bikeFormContainer} >

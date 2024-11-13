@@ -27,8 +27,8 @@ const create = async (bikeData) => {
 };
 
 const edit = async (bikeData) => {
-    const bikeId = bikeData._id;
-    return await requester.put(`${BASE_URL}/${bikeId}/edit`, bikeData);
+    // const bikeId = bikeData._id;
+    return await requester.put(`${BASE_URL}/${bikeData._id}/edit`, bikeData);
 };
 
 const remove = async (bikeId) => requester.del(`${BASE_URL}/${bikeId}`)
