@@ -25,7 +25,6 @@ bikeController.get('/lastAdded', async (req, res) => {
     }
 });
 bikeController.get('/userBikes', async (req, res) => {
-    console.log('inside');
 
     try {
         const ownerId = req.requesterId;

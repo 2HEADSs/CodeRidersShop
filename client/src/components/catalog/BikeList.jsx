@@ -7,7 +7,6 @@ export default function BikeList({ lastFourAdded, userBikes }) {
 
     const [bikes, loading, serverError] = useGetNeededBikes(lastFourAdded, userBikes);
 
-
     return (
         <div className={styles.catalogContainer}>
             {/* TODO: change style of h2 and h3 */}
