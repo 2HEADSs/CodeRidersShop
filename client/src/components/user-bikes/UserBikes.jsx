@@ -3,6 +3,6 @@ import BikeList from "../catalog/BikeList.jsx";
 
 export default function UserBikes() {
     return (
-        <BikeList useBikes={true}></BikeList>
+        <BikeList userBikes={true}></BikeList>
     );
 }

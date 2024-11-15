@@ -8,7 +8,6 @@ export function AuthContextProvider(props) {
 
     const changeAuthState = (state) => {
         console.log(state);
-
         setAuthState(state)
     };
 

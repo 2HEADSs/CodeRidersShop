@@ -16,6 +16,10 @@ const getLastAdded = async () => {
     return await requester.get(`${BASE_URL}/lastAdded`);
 };
 
+const getUserBikes = async () => {
+    return await requester.get(`${BASE_URL}/userBikes`);
+};
+
 
 const getOne = async (bikeId) => {
     return await requester.get(`${BASE_URL}/${bikeId}`);
@@ -36,8 +40,9 @@ const remove = async (bikeId) => requester.del(`${BASE_URL}/${bikeId}`)
 
 export {
     getAllBikes,
-    getOne,
     getLastAdded,
+    getUserBikes,
+    getOne,
     create,
     edit,
     remove

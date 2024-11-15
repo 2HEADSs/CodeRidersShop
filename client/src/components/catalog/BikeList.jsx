@@ -3,10 +3,9 @@ import BikeCard from '../bike-card/BikeCard.jsx';
 import { useGetNeededBikes } from '../../hooks/useBikesData.js';
 
 
-export default function BikeList({ lastFourAdded, useBikes }) {
+export default function BikeList({ lastFourAdded, userBikes }) {
 
-    const [bikes, loading, serverError] = useGetNeededBikes(lastFourAdded, useBikes);
-
+    const [bikes, loading, serverError] = useGetNeededBikes(lastFourAdded, userBikes);
 
 
     return (
@@ -15,11 +14,11 @@ export default function BikeList({ lastFourAdded, useBikes }) {
             {lastFourAdded &&
                 <h2 className={styles.catalogTitle}>Last added motorcyles</h2>
             }
-            {useBikes &&
-                <h2 className={styles.catalogTitle}>My Motorcycles</h2>
+            {userBikes &&
+                <h2 className={styles.catalogTitle}>My motorcycles</h2>
             }
             {
-                (!lastFourAdded && !useBikes) &&
+                (!lastFourAdded && !userBikes) &&
                 <h2 className={styles.catalogTitle}>Motorcycle Catalog</h2>
             }
 

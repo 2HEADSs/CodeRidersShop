@@ -1,18 +1,9 @@
 import express from 'express';
-import { createBike, deleteById, editBike, getAllBikes, getById, lastFourAdded } from '../services/bikeService.js';
+import { createBike, deleteById, editBike, getAllBikes, getById, lastFourAdded, userBikes } from '../services/bikeService.js';
 const bikeController = express.Router();
 
 
 
-bikeController.get('/lastAdded', async (req, res) => {
-    try {
-        const lastAdded = await lastFourAdded();
-        res.status(200).json(lastAdded);
-    } catch (error) {
-        console.log(error.message);
-
-    }
-});
 
 bikeController.get('/', async (req, res) => {
     try {
@@ -23,6 +14,29 @@ bikeController.get('/', async (req, res) => {
 
     }
 });
+
+bikeController.get('/lastAdded', async (req, res) => {
+    try {
+        const lastAdded = await lastFourAdded();
+        res.status(200).json(lastAdded);
+    } catch (error) {
+        res.status(400).json({ message: "An error ocured in server!" });
+
+    }
+});
+bikeController.get('/userBikes', async (req, res) => {
+    console.log('inside');
+
+    try {
+        const ownerId = req.requesterId;
+        const result = await userBikes(ownerId);
+        res.status(200).json(result);
+    } catch (error) {
+        console.log(error.message);
+
+    }
+});
+
 
 bikeController.get('/:id', async (req, res) => {
 

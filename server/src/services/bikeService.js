@@ -25,6 +25,9 @@ async function lastFourAdded() {
         .sort({ createdAt: -1 })
         .limit(4);
 }
+async function userBikes(ownerId) {
+    return Bike.find({ owner: ownerId }).exec();
+}
 
 async function deleteById(_id) {
     try {
@@ -41,4 +44,4 @@ async function deleteById(_id) {
 
 }
 
-export { createBike, getAllBikes, getById, lastFourAdded, editBike, deleteById }
+export { createBike, getAllBikes, getById, lastFourAdded, editBike, deleteById, userBikes }

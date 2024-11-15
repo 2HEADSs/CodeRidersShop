@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { create, edit, getAllBikes, getLastAdded, getOne } from '../api/bike-api';
+import { create, edit, getAllBikes, getLastAdded, getOne, getUserBikes } from '../api/bike-api';
 
 
-export function useGetNeededBikes(lastFourAdded) {
+export function useGetNeededBikes(lastFourAdded, userBikes) {
     const [bikes, setBikes] = useState([]);
     const [loading, setLoading] = useState(true);
     const [serverError, setServerError] = useState("");
@@ -15,6 +15,8 @@ export function useGetNeededBikes(lastFourAdded) {
             try {
                 if (lastFourAdded) {
                     result = await getLastAdded();
+                } else if (userBikes) {
+                    result = await getUserBikes();
                 } else {
                     result = await getAllBikes();
                 }
@@ -73,6 +75,7 @@ export function useCreateBike() {
         try {
             const bikeResult = await create(bikeData);
             return bikeResult
+            //todo: to check navigate.
             navigate(`/bikes/${bikeResult._id}/details`);
             setNewBike(bikeResult);
         } catch (error) {
