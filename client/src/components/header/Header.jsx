@@ -16,6 +16,7 @@ export default function Header() {
                     {isAuthenticated
                         ? <>
                             <Link to="/create" className={styles.navItem}>Add Bike</Link>
+                            <Link to="/my-bikes" className={styles.navItem}>My Bikes</Link>
                             <Link to="/user" className={styles.navItem}>User</Link>
                             <Link to="/logout" className={styles.navItem}>Logout</Link>
                         </>

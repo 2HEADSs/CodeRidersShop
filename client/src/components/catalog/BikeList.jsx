@@ -3,17 +3,26 @@ import BikeCard from '../bike-card/BikeCard.jsx';
 import { useGetNeededBikes } from '../../hooks/useBikesData.js';
 
 
-export default function BikeList({ lastFourAdded }) {
+export default function BikeList({ lastFourAdded, useBikes }) {
 
-    const [bikes, loading, serverError] = useGetNeededBikes(lastFourAdded)
+    const [bikes, loading, serverError] = useGetNeededBikes(lastFourAdded, useBikes);
+
+
 
     return (
         <div className={styles.catalogContainer}>
             {/* TODO: change style of h2 and h3 */}
-            {lastFourAdded
-                ? <h2 className={styles.catalogTitle}>Last added motorcyles</h2>
-                : <h2 className={styles.catalogTitle}>Motorcycle Catalog</h2>
+            {lastFourAdded &&
+                <h2 className={styles.catalogTitle}>Last added motorcyles</h2>
             }
+            {useBikes &&
+                <h2 className={styles.catalogTitle}>My Motorcycles</h2>
+            }
+            {
+                (!lastFourAdded && !useBikes) &&
+                <h2 className={styles.catalogTitle}>Motorcycle Catalog</h2>
+            }
+
             {/* TODO: add propper loading component */}
             {loading && <h1>Loading....</h1>}
             {bikes.length > 0 && !serverError

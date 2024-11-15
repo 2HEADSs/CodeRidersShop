@@ -11,6 +11,7 @@ import BikeDetails from './components/bike-details/BikeDetails';
 import { AuthContextProvider } from './contexts/AuthContext';
 import Logout from './components/logout/Logout';
 import BikeEdit from './components/bike-edit/BikeEdit';
+import UserBikes from './components/user-bikes/UserBikes';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />
           <Route path='/bikes' element={<BikeList />} />
+          <Route path='/my-bikes' element={<UserBikes />} />
           <Route path='/bikes/:bikeId/details' element={<BikeDetails />} />
           <Route path='/bikes/:bikeId/edit' element={<BikeEdit />} />
           <Route path='/user' element={<User />} />
