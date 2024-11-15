@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { create, edit, getAllBikes, getLastAdded, getOne, getUserBikes } from '../api/bike-api';
+import { create, getAllBikes, getLastAdded, getOne, getUserBikes } from '../api/bike-api';
 
 
 export function useGetNeededBikes(lastFourAdded, userBikes) {
@@ -28,7 +28,7 @@ export function useGetNeededBikes(lastFourAdded, userBikes) {
             setBikes(result);
         })();
 
-    }, [lastFourAdded]);
+    }, [lastFourAdded, userBikes]);
 
     return [bikes, loading, serverError];
 };
