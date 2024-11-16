@@ -42,6 +42,7 @@ export default function BikeCreate() {
 
     const createHandler = async (values) => {
         const bikeResult = await createBike(values);
+
         if (newBike && !loading) {
             navigate(`/bikes/${bikeResult._id}/details`);
         }
