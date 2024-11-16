@@ -41,8 +41,7 @@ const userSchema = new Schema({
             message: props => `${props.value} is not a valid phone number!`
         }
     },
-    hashedPassword: { type: String, required: true, select: false },
-    wishList: { type: Array, default: [], required: false }
+    hashedPassword: { type: String, required: true, select: false }
     //TODO
     // bikesForSale: [{ type: ObjectId, ref: '' }],
     // City

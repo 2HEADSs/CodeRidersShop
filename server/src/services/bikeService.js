@@ -40,8 +40,26 @@ async function deleteById(_id) {
         console.log('Error - deleting bike: bikeService' + error);
         throw error;
     }
+}
 
+async function likeUnlikeBike(bikeId, userId) {
+    const bike = await getById(bikeId);
+    if (!bike) {
+        throw new Error("Bike not found.");
+    }
+
+    const hasAlreadyLiked = bike.likes.some(x => x === userId);
+    if (hasAlreadyLiked) {
+        bike.likes = bike.likes.filter(x => {
+            x !== userId
+        });
+    } else {
+        bike.likes.push(userId);
+    }
+
+    const updatedBike = await bike.save({ validateBeforeSave: false });
+    return updatedBike.likes;
 
 }
 
-export { createBike, getAllBikes, getById, lastFourAdded, editBike, deleteById, userBikes }
+export { createBike, getAllBikes, getById, lastFourAdded, editBike, deleteById, userBikes, likeUnlikeBike }

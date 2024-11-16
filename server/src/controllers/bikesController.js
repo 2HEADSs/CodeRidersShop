@@ -1,5 +1,5 @@
 import express from 'express';
-import { createBike, deleteById, editBike, getAllBikes, getById, lastFourAdded, userBikes } from '../services/bikeService.js';
+import { createBike, deleteById, editBike, getAllBikes, getById, lastFourAdded, likeUnlikeBike, userBikes } from '../services/bikeService.js';
 const bikeController = express.Router();
 
 
@@ -121,7 +121,20 @@ bikeController.put('/:id/edit', async (req, res) => {
     }
 });
 
+bikeController.post('/:id/like', async (req, res) => {
+    try {
+        const bikeId = req.params.id;
+        const userId = req?.requesterId;
+        if (!bikeId || !userId) {
+            console.log('bikeController like-unlike');
+        }
+        const newLikedArray = await likeUnlikeBike(bikeId, userId);
+        res.status(200).json(newLikedArray);
+    } catch (error) {
+        res.status(400).json({ message: error.message });
 
+    }
+});
 
 
 export default bikeController;

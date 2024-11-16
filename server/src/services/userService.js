@@ -12,10 +12,11 @@ async function registerUser(userData) {
     const user = await User.create(userData);
     const userWithoutPassword = user.toObject();
     delete userWithoutPassword.hashedPassword;
-    delete userWithoutPassword.wishList;
     delete userWithoutPassword["__v"];
 
     const accessToken = createAccessToken(user);
+    console.log(user);
+
 
 
     return Object.assign({ user: userWithoutPassword }, { accessToken })
@@ -37,7 +38,6 @@ async function loginUser(email, password) {
         throw new Error('Wrong email or password!');
     }
 
-
     const validateUser = user.validateSync();
     if (validateUser) {
         throw new Error('User is not valid!');
@@ -45,13 +45,15 @@ async function loginUser(email, password) {
 
     const userWithoutPassword = user.toObject();
     delete userWithoutPassword.hashedPassword;
-    delete userWithoutPassword.wishList;
     delete userWithoutPassword["__v"];
 
     const accessToken = createAccessToken(userWithoutPassword);
-
+    console.log(user);
     return Object.assign(userWithoutPassword, { accessToken })
 
+}
+async function getOneUser(id) {
+    return await User.findById(id)
 }
 
 function createAccessToken(user) {
@@ -63,4 +65,4 @@ function createAccessToken(user) {
     return jwt.sign(payload, secretForAccessToken)
 }
 
-export { registerUser, loginUser }
+export { registerUser, loginUser, getOneUser }

@@ -37,7 +37,7 @@ const edit = async (bikeData) => {
 
 const remove = async (bikeId) => requester.del(`${BASE_URL}/${bikeId}/deleteBike`);
 
-const addToWishList = async (bikeId) => requester.post(`${BASE_URL}/${bikeId}`)
+const addToWishList = async (bikeId) => requester.post(`${BASE_URL}/${bikeId}/like`)
 
 
 export {

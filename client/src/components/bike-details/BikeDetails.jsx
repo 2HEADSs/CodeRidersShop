@@ -4,7 +4,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useGetOneBike } from '../../hooks/useBikesData';
 import { Link } from 'react-router-dom';
 import { useAuthContext } from '../../contexts/AuthContext';
-import { remove } from '../../api/bike-api';
+import { addToWishList, remove } from '../../api/bike-api';
+import { useEffect, useState } from 'react';
 
 function BikeDetails() {
     const navigate = useNavigate();
@@ -12,6 +13,16 @@ function BikeDetails() {
     const { bikeId } = useParams();
     const [bike, loading, error] = useGetOneBike(bikeId);
     const { userId, ...data } = useAuthContext();
+    const [bikeLikesList, setbikeLikesList] = useState(bike.likes);
+    const [loadingWishList, setloadingWishList] = useState(false);
+    console.log(bikeLikesList);
+    useEffect(() => {
+        if (bike?.likes) {
+            setbikeLikesList(bike.likes);
+        }
+    }, [bike]);
+
+
 
     const bikeDeleteHandler = async () => {
 
@@ -22,6 +33,18 @@ function BikeDetails() {
         try {
             await remove(bikeId);
             navigate(`/`);
+        } catch (error) {
+            console.log(error);
+
+        }
+    };
+
+    const addToWishListHandler = async () => {
+        setloadingWishList(true);
+        try {
+            const result = await addToWishList(bikeId);
+            setbikeLikesList(result);
+            //TODO: wishlist- change button to icon?
         } catch (error) {
             console.log(error);
 
@@ -47,7 +70,35 @@ function BikeDetails() {
                         <p><strong>Description:</strong> {bike.description || "No additional details available."}</p>
                         <p><strong>Contact with owner:</strong> {data.userEmail}</p>
                         <p><strong>Created:</strong> {formatCreatedAt(bike.createdAt)}</p>
-                        {userId &&
+                        {(bike.owner == userId) &&
+                            <>
+                                <Link to={`/bikes/${bike._id}/edit`} className={styles.bikeLink}>Edit</Link>
+                                <Link to={'#'} onClick={bikeDeleteHandler} className={styles.bikeLink}>Delete</Link>
+                            </>
+                        }
+                        {loadingWishList &&
+                            <p>Loading wishlist...</p>
+                        }
+                        {((userId && bike.owner != userId) &&
+                            (bikeLikesList?.some(x => x === userId)))
+                            ? <Link to={'#'} onClick={addToWishListHandler} className={styles.bikeLink}>Remove from favorites</Link>
+                            : <Link to={'#'} onClick={addToWishListHandler} className={styles.bikeLink}>Add to favorites</Link>
+
+                        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        {/* {userId &&
                             <div className={styles.bikeLinksButtons}>
                                 {bike?.owner == userId
                                     ?
@@ -55,10 +106,20 @@ function BikeDetails() {
                                         <Link to={`/bikes/${bike._id}/edit`} className={styles.bikeLink}>Edit</Link>
                                         <Link to={'#'} onClick={bikeDeleteHandler} className={styles.bikeLink}>Delete</Link>
                                     </>
-                                    : <Link to={`/bikes/${bike._id}/details`} className={styles.bikeLink}>Wish List</Link>
+                                    :
+                                    <>
+                                        {loadingWishList
+                                            //TODO: Add propper loading element
+                                            ? <p>Loading wishlist...</p>
+                                            //TODO: Change link to button
+                                            : <Link to={'#'} onClick={addToWishListHandler} className={styles.bikeLink}>Add to favorites</Link>
+
+                                        }
+
+                                    </>
                                 }
                             </div>
-                        }
+                        } */}
                     </div>
                 </div>)
             }

@@ -67,6 +67,7 @@ const bikeSchema = new Schema({
         default: "Random Description"
     },
     owner: { type: ObjectId, ref: 'User', required: true },
+    likes: { type: Array, default: [], required: false }
 }, {
     timestamps: true
 });

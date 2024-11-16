@@ -5,9 +5,19 @@ import { useAuthContext } from '../../contexts/AuthContext';
 
 function BikeCard({ bike }) {
     const { userId, ...data } = useAuthContext();
-    console.log(userId);
-    console.log(bike.owner);
+    // console.log(userId);
+    // console.log(bike.owner);
 
+    // const addToWishListHandler = async () => {
+    //     setloadingWishList(true);
+    //     try {
+    //         await addToWishList(bikeId);
+    //         //TODO: wishlist- change button to icon?
+    //     } catch (error) {
+    //         console.log(error);
+
+    //     }
+    // };
 
     return (
         <div className={styles.bikeCard}>
@@ -21,6 +31,7 @@ function BikeCard({ bike }) {
                 <div className={styles.bikeLinksButtons}>
                     <Link to={`/bikes/${bike._id}/details`} className={styles.bikeLink}>Details</Link>
                     {(userId == bike.owner) && <Link to={`/bikes/${bike._id}/edit`} className={styles.bikeLink}>Edit</Link>}
+                    {/* {((userId) && (userId !== bike.owner)) && <Link to={'#'} onClick={addToWishListHandler} className={styles.bikeLink}>Add to favorites</Link>} */}
                 </div>
             </div>
         </div>
