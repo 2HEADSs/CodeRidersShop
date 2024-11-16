@@ -49,7 +49,7 @@ bikeController.get('/:id', async (req, res) => {
 });
 
 
-bikeController.delete('/:id', async (req, res) => {
+bikeController.delete('/:id/deleteBike', async (req, res) => {
 
     try {
         await deleteById(req.params.id);
