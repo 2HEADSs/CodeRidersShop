@@ -37,157 +37,145 @@ const initialValues = {
     description: ''
 };
 export default function BikeCreate() {
-    const navigate = useNavigate();
-    const [newBike, error, loading, createBike] = useCreateBike();
 
-    const createHandler = async (values) => {
-        const bikeResult = await createBike(values);
-
-        if (newBike && !loading) {
-            navigate(`/bikes/${bikeResult._id}/details`);
-        }
-        if (error) {
-            console.log(error);
-        }
-    };
-
-    const { values, changeHandler, submitHandler } = useForm(initialValues, createHandler);
 
     return (
         <>
-            {loading && (<p>Creating bike...</p>)}
+            {/* {loading && (<p>Creating bike...</p>)}
             {error && (
                 <>
                     <p className={styles.errorMessage}>Server error: {error}</p>
                     <p className={styles.errorMessage}>Please try again:</p>
                     <Link to="/create" className={styles.errorLink}>Add Bike</Link>
                 </>
-            )}
+            )} */}
 
-            {(!loading && !error) &&
-                <div className={styles.bikeFormContainer}>
-                    <form
-                        className={styles.bikeForm}
-                        onSubmit={submitHandler}
-                    >
-                        <h2>Create a New Bike</h2>
+            {/* {(!loading && !error) && */}
+            <div className={styles.bikeFormContainer}>
+                <form
+                    className={styles.bikeForm}
+                // onSubmit={submitHandler}
+                >
+                    <h2>Create a New Bike</h2>
 
-                        <div className={styles.inputGroup}>
-                            <label htmlFor="model">Model</label>
-                            <input
-                                type="text"
-                                id="model"
-                                name="model"
-                                onChange={changeHandler}
-                                value={values.model}
-                                required
-                            />
-                        </div>
+                    <div className={styles.inputGroup}>
+                        <label htmlFor="model">Model</label>
+                        <input
+                            type="text"
+                            id="model"
+                            name="model"
+                            // onChange={changeHandler}
+                            value={initialValues.model}
+                            required
+                        />
+                    </div>
 
-                        <div className={styles.inputGroup}>
-                            <label htmlFor="manufacturer">Manufacturer</label>
-                            <select
-                                id="manufacturer"
-                                name="manufacturer"
-                                onChange={changeHandler}
-                                value={values.manufacturer}
-                                required
-                            >
-                                <option value="">Select a manufacturer</option>
-                                {manufacturers.map((manufacturer, index) => (
-                                    <option key={index} value={manufacturer}>{manufacturer}</option>
-                                ))}
-                            </select>
-                        </div>
+                    <div className={styles.inputGroup}>
+                        <label htmlFor="manufacturer">Manufacturer</label>
+                        <select
+                            id="manufacturer"
+                            name="manufacturer"
+                            // onChange={changeHandler}
+                            value={initialValues.manufacturer}
+                            required
+                        >
+                            <option value="">Select a manufacturer</option>
+                            {manufacturers.map((manufacturer, index) => (
+                                <option key={index} value={manufacturer}>{manufacturer}</option>
+                            ))}
+                        </select>
+                    </div>
 
-                        <div className={styles.inputGroup}>
-                            <label htmlFor="color">Color</label>
-                            <input
-                                type="text"
-                                id="color"
-                                name="color"
-                                onChange={changeHandler}
-                                value={values.color}
-                                required
-                            />
-                        </div>
+                    <div className={styles.inputGroup}>
+                        <label htmlFor="color">Color</label>
+                        <input
+                            type="text"
+                            id="color"
+                            name="color"
+                            // onChange={changeHandler}
+                            value={initialValues.color}
+                            required
+                        />
+                    </div>
 
-                        <div className={styles.inputGroup}>
-                            <label htmlFor="engineCapacity">Engine Capacity (cc)</label>
-                            <input
-                                type="number"
-                                id="engineCapacity"
-                                name="engineCapacity"
-                                onChange={changeHandler}
-                                value={values.engineCapacity}
-                                required
-                            />
-                        </div>
+                    <div className={styles.inputGroup}>
+                        <label htmlFor="engineCapacity">Engine Capacity (cc)</label>
+                        <input
+                            type="number"
+                            id="engineCapacity"
+                            name="engineCapacity"
+                            // onChange={changeHandler}
+                            value={initialValues.engineCapacity}
+                            required
+                        />
+                    </div>
 
-                        <div className={styles.inputGroup}>
-                            <label htmlFor="price">Price ($)</label>
-                            <input
-                                type="number"
-                                id="price"
-                                name="price"
-                                onChange={changeHandler}
-                                value={values.price}
-                                required
-                            />
-                        </div>
+                    <div className={styles.inputGroup}>
+                        <label htmlFor="price">Price ($)</label>
+                        <input
+                            type="number"
+                            id="price"
+                            name="price"
+                            // onChange={changeHandler}
+                            value={initialValues.price}
+                            required
+                        />
+                    </div>
 
-                        <div className={styles.inputGroup}>
-                            <label htmlFor="year">Year</label>
-                            <input
-                                type="number"
-                                id="year"
-                                name="year"
-                                onChange={changeHandler}
-                                value={values.year}
-                                min="1885"
-                                max="2024"
-                                required
-                            />
-                        </div>
+                    <div className={styles.inputGroup}>
+                        <label htmlFor="year">Year</label>
+                        <input
+                            type="number"
+                            id="year"
+                            name="year"
+                            // onChange={changeHandler}
+                            value={initialValues.year}
+                            min="1885"
+                            max="2024"
+                            required
+                        />
+                    </div>
 
 
 
-                        <div className={styles.inputGroup}>
-                            <label htmlFor="img">Image URL</label>
-                            <input
-                                type="text"
-                                id="img"
-                                name="img"
-                                onChange={changeHandler}
-                                value={values.img}
-                            />
-                        </div>
+                    <div className={styles.inputGroup}>
+                        <label htmlFor="img">Image URL</label>
+                        <input
+                            type="text"
+                            id="img"
+                            name="img"
+                            // onChange={changeHandler}
+                            value={initialValues.img}
+                        />
+                    </div>
 
-                        <div className={styles.inputGroupUsed}>
-                            <label htmlFor="used">Used</label>
-                            <input
-                                type="checkbox"
-                                id="used"
-                                name="used"
-                                onChange={changeHandler}
-                                checked={values.used}
-                            />
-                        </div>
-                        <div className={styles.inputGroup}>
-                            <label htmlFor="description">Description</label>
-                            <textarea
-                                id="description"
-                                name="description"
-                                onChange={changeHandler}
-                                value={values.description}
-                                rows="4"
-                            />
-                        </div>
+                    <div className={styles.inputGroupUsed}>
+                        <label htmlFor="used">Used</label>
+                        <input
+                            type="checkbox"
+                            id="used"
+                            name="used"
+                            // onChange={changeHandler}
+                            checked={initialValues.used}
+                        />
+                    </div>
+                    <div className={styles.inputGroup}>
+                        <label htmlFor="description">Description</label>
+                        <textarea
+                            id="description"
+                            name="description"
+                            // onChange={changeHandler}
+                            value={initialValues.description}
+                            rows="4"
+                        />
+                    </div>
 
-                        <button type="submit" className={styles.submitButton}>Create Bike</button>
-                    </form>
-                </div>}
+                    <button type="submit" className={styles.submitButton}>Create Bike</button>
+                </form>
+            </div>
+            {/* } */}
         </>
     );
 };
 
+// 
