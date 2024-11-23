@@ -36,21 +36,19 @@ const initialValues = {
 
 export default function BikeCreate() {
 
-    const [bike, setBike] = useState(initialValues);
+    const [bikeFormValues, setbikeFormValues] = useState(initialValues);
     //TODO: router.refresh()
     const submitHandler = (e) => {
         e.preventDefault();
         console.log('Form submittes');
+        console.log(bikeFormValues);
+
     };
 
     const changeHandler = (e) => {
-        if (e.target.type === 'checkbox') {
-            setBike(oldBike => ({ ...oldBike, [e.target.name]: e.target.checked }))
+        setbikeFormValues(oldBike => ({ ...oldBike, [e.target.name]: e.target.value || e.target.checked }))
+    };
 
-        } else {
-            setBike(oldBike => ({ ...oldBike, [e.target.name]: e.target.value }))
-        }
-    }
     return (
         <>
             <div className={styles.bikeFormContainer}>
@@ -66,7 +64,7 @@ export default function BikeCreate() {
                             type="text"
                             id="model"
                             name="model"
-                            value={bike.model}
+                            value={bikeFormValues.model}
                             onChange={changeHandler}
                         // required
                         />
@@ -78,7 +76,7 @@ export default function BikeCreate() {
                             id="manufacturer"
                             name="manufacturer"
                             onChange={changeHandler}
-                            value={bike.manufacturer}
+                            value={bikeFormValues.manufacturer}
                         // required
                         >
                             <option value="">Select a manufacturer</option>
@@ -94,7 +92,7 @@ export default function BikeCreate() {
                             type="text"
                             id="color"
                             name="color"
-                            value={bike.color}
+                            value={bikeFormValues.color}
                             onChange={changeHandler}
                         // required
                         />
@@ -106,7 +104,7 @@ export default function BikeCreate() {
                             type="number"
                             id="engineCapacity"
                             name="engineCapacity"
-                            value={bike.engineCapacity}
+                            value={bikeFormValues.engineCapacity}
                             onChange={changeHandler}
                         // required
                         />
@@ -118,7 +116,7 @@ export default function BikeCreate() {
                             type="number"
                             id="price"
                             name="price"
-                            value={bike.price}
+                            value={bikeFormValues.price}
                             onChange={changeHandler}
                         // required
                         />
@@ -130,7 +128,7 @@ export default function BikeCreate() {
                             type="number"
                             id="year"
                             name="year"
-                            value={bike.year}
+                            value={bikeFormValues.year}
                             onChange={changeHandler}
                             min="1885"
                             max="2024"
@@ -146,7 +144,7 @@ export default function BikeCreate() {
                             type="text"
                             id="img"
                             name="img"
-                            value={bike.img}
+                            value={bikeFormValues.img}
                             onChange={changeHandler}
                         />
                     </div>
@@ -157,7 +155,7 @@ export default function BikeCreate() {
                             type="checkbox"
                             id="used"
                             name="used"
-                            value={bike.used}
+                            value={bikeFormValues.used}
                             onChange={changeHandler}
                         />
                     </div>
@@ -166,7 +164,7 @@ export default function BikeCreate() {
                         <textarea
                             id="description"
                             name="description"
-                            value={bike.description}
+                            value={bikeFormValues.description}
                             onChange={changeHandler}
                             rows="4"
                         />
