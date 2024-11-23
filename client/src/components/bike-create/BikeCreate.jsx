@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './BikeCreate.module.css';
+import { useCreateBike } from '../../hooks/useBikesData';
+import { Link, useLocation } from 'react-router-dom';
 
 const manufacturers = [
     'Access Motor', 'Adly', 'Aeon', 'AGM MOTORS', 'Aixam', 'American Ironhorse', 'Aprilia',
@@ -35,14 +37,20 @@ const initialValues = {
 };
 
 export default function BikeCreate() {
-
     const [bikeFormValues, setbikeFormValues] = useState(initialValues);
-    //TODO: router.refresh()
-    const submitHandler = (e) => {
-        e.preventDefault();
-        console.log('Form submittes');
-        console.log(bikeFormValues);
+    const [newBike, error, loading, createBike, clearError] = useCreateBike();
 
+    console.log(error);
+    console.log(newBike);
+    //TODO: router.refresh()
+    const submitHandler = async (e) => {
+        e.preventDefault();
+        const bikeResult = await createBike(bikeFormValues);
+        if (newBike) {
+            console.log(bikeResult);
+        } else if (error) {
+            console.log(error);
+        }
     };
 
     const changeHandler = (e) => {
@@ -51,129 +59,145 @@ export default function BikeCreate() {
 
     return (
         <>
-            <div className={styles.bikeFormContainer}>
-                <form
-                    className={styles.bikeForm}
-                    onSubmit={submitHandler}
-                >
-                    <h2>Create a New Bike</h2>
+            {loading && (<p>Creating bike...</p>)}
+            {error && (
+                <>
+                    <p className={styles.errorMessage}>Server error: {error}</p>
+                    <p className={styles.errorMessage}>Please try again:</p>
 
-                    <div className={styles.inputGroup}>
-                        <label htmlFor="model">Model</label>
-                        <input
-                            type="text"
-                            id="model"
-                            name="model"
-                            value={bikeFormValues.model}
-                            onChange={changeHandler}
-                        // required
-                        />
-                    </div>
+                    <button
+                        className={styles.errorLink}
+                        onClick={() => clearError()}
+                    >
+                        Okey
+                    </button>
+                </>
+            )}
 
-                    <div className={styles.inputGroup}>
-                        <label htmlFor="manufacturer">Manufacturer</label>
-                        <select
-                            id="manufacturer"
-                            name="manufacturer"
-                            onChange={changeHandler}
-                            value={bikeFormValues.manufacturer}
-                        // required
-                        >
-                            <option value="">Select a manufacturer</option>
-                            {manufacturers.map((manufacturer, index) => (
-                                <option key={index} value={manufacturer}>{manufacturer}</option>
-                            ))}
-                        </select>
-                    </div>
+            {(!loading && !error) &&
+                < div className={styles.bikeFormContainer}>
+                    <form
+                        className={styles.bikeForm}
+                        onSubmit={submitHandler}
+                    >
+                        <h2>Create a New Bike</h2>
 
-                    <div className={styles.inputGroup}>
-                        <label htmlFor="color">Color</label>
-                        <input
-                            type="text"
-                            id="color"
-                            name="color"
-                            value={bikeFormValues.color}
-                            onChange={changeHandler}
-                        // required
-                        />
-                    </div>
+                        <div className={styles.inputGroup}>
+                            <label htmlFor="model">Model</label>
+                            <input
+                                type="text"
+                                id="model"
+                                name="model"
+                                value={bikeFormValues.model}
+                                onChange={changeHandler}
+                            // required
+                            />
+                        </div>
 
-                    <div className={styles.inputGroup}>
-                        <label htmlFor="engineCapacity">Engine Capacity (cc)</label>
-                        <input
-                            type="number"
-                            id="engineCapacity"
-                            name="engineCapacity"
-                            value={bikeFormValues.engineCapacity}
-                            onChange={changeHandler}
-                        // required
-                        />
-                    </div>
+                        <div className={styles.inputGroup}>
+                            <label htmlFor="manufacturer">Manufacturer</label>
+                            <select
+                                id="manufacturer"
+                                name="manufacturer"
+                                onChange={changeHandler}
+                                value={bikeFormValues.manufacturer}
+                            // required
+                            >
+                                <option value="">Select a manufacturer</option>
+                                {manufacturers.map((manufacturer, index) => (
+                                    <option key={index} value={manufacturer}>{manufacturer}</option>
+                                ))}
+                            </select>
+                        </div>
 
-                    <div className={styles.inputGroup}>
-                        <label htmlFor="price">Price ($)</label>
-                        <input
-                            type="number"
-                            id="price"
-                            name="price"
-                            value={bikeFormValues.price}
-                            onChange={changeHandler}
-                        // required
-                        />
-                    </div>
+                        <div className={styles.inputGroup}>
+                            <label htmlFor="color">Color</label>
+                            <input
+                                type="text"
+                                id="color"
+                                name="color"
+                                value={bikeFormValues.color}
+                                onChange={changeHandler}
+                            // required
+                            />
+                        </div>
 
-                    <div className={styles.inputGroup}>
-                        <label htmlFor="year">Year</label>
-                        <input
-                            type="number"
-                            id="year"
-                            name="year"
-                            value={bikeFormValues.year}
-                            onChange={changeHandler}
-                            min="1885"
-                            max="2024"
-                        // required
-                        />
-                    </div>
+                        <div className={styles.inputGroup}>
+                            <label htmlFor="engineCapacity">Engine Capacity (cc)</label>
+                            <input
+                                type="number"
+                                id="engineCapacity"
+                                name="engineCapacity"
+                                value={bikeFormValues.engineCapacity}
+                                onChange={changeHandler}
+                            // required
+                            />
+                        </div>
+
+                        <div className={styles.inputGroup}>
+                            <label htmlFor="price">Price ($)</label>
+                            <input
+                                type="number"
+                                id="price"
+                                name="price"
+                                value={bikeFormValues.price}
+                                onChange={changeHandler}
+                            // required
+                            />
+                        </div>
+
+                        <div className={styles.inputGroup}>
+                            <label htmlFor="year">Year</label>
+                            <input
+                                type="number"
+                                id="year"
+                                name="year"
+                                value={bikeFormValues.year}
+                                onChange={changeHandler}
+                                min="1885"
+                                max="2024"
+                            // required
+                            />
+                        </div>
 
 
 
-                    <div className={styles.inputGroup}>
-                        <label htmlFor="img">Image URL</label>
-                        <input
-                            type="text"
-                            id="img"
-                            name="img"
-                            value={bikeFormValues.img}
-                            onChange={changeHandler}
-                        />
-                    </div>
+                        <div className={styles.inputGroup}>
+                            <label htmlFor="img">Image URL</label>
+                            <input
+                                type="text"
+                                id="img"
+                                name="img"
+                                value={bikeFormValues.img}
+                                onChange={changeHandler}
+                            />
+                        </div>
 
-                    <div className={styles.inputGroupUsed}>
-                        <label htmlFor="used">Used</label>
-                        <input
-                            type="checkbox"
-                            id="used"
-                            name="used"
-                            value={bikeFormValues.used}
-                            onChange={changeHandler}
-                        />
-                    </div>
-                    <div className={styles.inputGroup}>
-                        <label htmlFor="description">Description</label>
-                        <textarea
-                            id="description"
-                            name="description"
-                            value={bikeFormValues.description}
-                            onChange={changeHandler}
-                            rows="4"
-                        />
-                    </div>
+                        <div className={styles.inputGroupUsed}>
+                            <label htmlFor="used">Used</label>
+                            <input
+                                type="checkbox"
+                                id="used"
+                                name="used"
+                                value={bikeFormValues.used}
+                                onChange={changeHandler}
+                            />
+                        </div>
+                        <div className={styles.inputGroup}>
+                            <label htmlFor="description">Description</label>
+                            <textarea
+                                id="description"
+                                name="description"
+                                value={bikeFormValues.description}
+                                onChange={changeHandler}
+                                rows="4"
+                            />
+                        </div>
 
-                    <button type="submit" className={styles.submitButton}>Create Bike</button>
-                </form>
-            </div>
-            {/* } */}
+                        <button type="submit" className={styles.submitButton}>Create Bike</button>
+                    </form>
+                </div >
+            }
         </>
     );
 };

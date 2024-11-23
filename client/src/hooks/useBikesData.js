@@ -67,6 +67,9 @@ export function useCreateBike() {
     const [newBike, setNewBike] = useState(null);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
+    const clearError = () => {
+        setError(null)
+    }
 
 
     const createBike = async (bikeData) => {
@@ -85,7 +88,7 @@ export function useCreateBike() {
         }
     };
 
-    return [newBike, error, loading, createBike];
+    return [newBike, error, loading, createBike, clearError];
 }
 
 
