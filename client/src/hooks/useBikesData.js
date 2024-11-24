@@ -67,22 +67,20 @@ export function useCreateBike() {
     const [newBike, setNewBike] = useState(null);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
+
     const clearError = () => {
         setError(null)
-    }
-
+    };
 
     const createBike = async (bikeData) => {
         setLoading(true);
         setError(null);
         try {
             const bikeResult = await create(bikeData);
-            return bikeResult
-            //todo: to check navigate.
             navigate(`/bikes/${bikeResult._id}/details`);
-            setNewBike(bikeResult);
         } catch (error) {
             setError(error.message);
+            setNewBike(null);
         } finally {
             setLoading(false);
         }

@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import { useState } from 'react';
 import styles from './BikeCreate.module.css';
 import { useCreateBike } from '../../hooks/useBikesData';
-import { Link, useLocation } from 'react-router-dom';
 
 const manufacturers = [
     'Access Motor', 'Adly', 'Aeon', 'AGM MOTORS', 'Aixam', 'American Ironhorse', 'Aprilia',
@@ -40,21 +39,19 @@ export default function BikeCreate() {
     const [bikeFormValues, setbikeFormValues] = useState(initialValues);
     const [newBike, error, loading, createBike, clearError] = useCreateBike();
 
-    console.log(error);
-    console.log(newBike);
-    //TODO: router.refresh()
     const submitHandler = async (e) => {
         e.preventDefault();
-        const bikeResult = await createBike(bikeFormValues);
-        if (newBike) {
-            console.log(bikeResult);
-        } else if (error) {
-            console.log(error);
-        }
+        await createBike(bikeFormValues);
     };
 
     const changeHandler = (e) => {
-        setbikeFormValues(oldBike => ({ ...oldBike, [e.target.name]: e.target.value || e.target.checked }))
+        const { name, value, checked, type } = e.target;
+
+        setbikeFormValues(oldBike => ({
+            ...oldBike,
+            [name]: type === 'checkbox' ? checked : value
+
+        }))
     };
 
     return (
@@ -69,7 +66,7 @@ export default function BikeCreate() {
                         className={styles.errorLink}
                         onClick={() => clearError()}
                     >
-                        Okey
+                        Try again
                     </button>
                 </>
             )}
