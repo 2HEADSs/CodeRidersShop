@@ -3,26 +3,38 @@ import { useRegister } from '../../hooks/useAuthentication';
 import { useForm } from '../../hooks/useForm';
 import styles from './Register.module.css';
 import { useState } from 'react';
+import { RegisterSchema } from '../../yupSchema/registerSchema';
 
 
 const initialValues = { email: '', password: '', repass: '' }
 
 export default function Register() {
-    const [error, setError] = useState('');
+    const [validationErrors, setValidationErrors] = useState({});
+    const [serverError, setServerError] = useState('');
     const register = useRegister();
     const navigate = useNavigate();
+
     const registerHandler = async ({ email, password, repass }) => {
-        if (password !== repass) {
-            return setError('Password missmatch!');
-        }
 
         try {
+            await RegisterSchema.validate(values, { abortEarly: false });
+            setValidationErrors({});
+            setServerError('')
             await register(email, password, repass);
-            setError('');
             navigate('/');
         } catch (error) {
-            console.log(error.message);
-            setError(error.message);
+            if (error.name === 'ValidationError') {
+
+                const errors = error.inner.reduce((acc, err) => {
+                    acc[err.path] = err.message;
+                    return acc;
+                }, {});
+                setValidationErrors(errors);
+            } else {
+                setValidationErrors({});
+                console.error('Unexpected error:', error.message);
+                setServerError(error.message);
+            }
         }
     }
 
@@ -45,8 +57,9 @@ export default function Register() {
                         value={values.email}
                         onChange={changeHandler}
                         placeholder="Enter your email (e.g., you@example.com)"
-                        required
+                    // required
                     />
+                    {validationErrors.email && <p className={styles.validationError}>{validationErrors.email}</p>}
                 </div>
 
                 <div className={styles.inputGroup}>
@@ -58,8 +71,9 @@ export default function Register() {
                         value={values.password}
                         onChange={changeHandler}
                         placeholder="Enter your password"
-                        required
+                    // required
                     />
+                    {validationErrors.password && <p className={styles.validationError}>{validationErrors.password}</p>}
                 </div>
 
                 <div className={styles.inputGroup}>
@@ -71,11 +85,12 @@ export default function Register() {
                         value={values.repass}
                         onChange={changeHandler}
                         placeholder="Repeat your password"
-                        required
+                    // required
                     />
+                    {validationErrors.repass && <p className={styles.validationError}>{validationErrors.repass}</p>}
                 </div>
 
-                {error && (<p>{error}</p>)}
+                {serverError && <p className={styles.serverError}>{serverError}</p>}
 
                 <button type="submit" className={styles.registerButton}>Register</button>
 
