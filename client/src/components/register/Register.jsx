@@ -3,7 +3,7 @@ import { useRegister } from '../../hooks/useAuthentication';
 import { useForm } from '../../hooks/useForm';
 import styles from './Register.module.css';
 import { useState } from 'react';
-import { RegisterSchema } from '../../Schemas/registerSchema';
+import { RegisterSchema } from '../../schemas/registerSchema';
 
 
 const initialValues = { email: '', password: '', repass: '' }
