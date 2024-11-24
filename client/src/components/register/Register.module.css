@@ -77,3 +77,28 @@ h2 {
 .loginLink a:hover {
     text-decoration: underline;
 }
+
+
+.validationError {
+    color: #ff0000;
+    font-size: 14px;
+    margin-top: 5px;
+    text-align: center;
+    font-weight: bold;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.serverError {
+    width: 80%;
+    color: #d9534f;
+    font-size: 16px;
+    margin-top: 15px;
+    text-align: center;
+    font-weight: bold;
+    background-color: rgba(13, 13, 13, 0.7);
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ff0000;
+}
