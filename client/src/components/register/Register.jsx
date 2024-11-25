@@ -2,8 +2,8 @@ import { useNavigate } from 'react-router-dom';
 import { useRegister } from '../../hooks/useAuthentication';
 import { useForm } from '../../hooks/useForm';
 import styles from './Register.module.css';
-import { useState } from 'react';
 import { RegisterSchema } from '../../schemas/registerSchema';
+import { useState } from 'react';
 
 
 const initialValues = { email: '', password: '', repass: '' }
@@ -11,6 +11,8 @@ const initialValues = { email: '', password: '', repass: '' }
 export default function Register() {
     const [validationErrors, setValidationErrors] = useState({});
     const [serverError, setServerError] = useState('');
+    const [loading, setLoading] = useState(false);
+
     const register = useRegister();
     const navigate = useNavigate();
 
@@ -18,8 +20,9 @@ export default function Register() {
 
         try {
             await RegisterSchema.validate(values, { abortEarly: false });
+            setServerError('');
             setValidationErrors({});
-            setServerError('')
+            setLoading(true);
             await register(email, password, repass);
             navigate('/');
         } catch (error) {
@@ -30,10 +33,13 @@ export default function Register() {
                     return acc;
                 }, {});
                 setValidationErrors(errors);
+                setLoading(false);
+                console.log(validationErrors);
             } else {
                 setValidationErrors({});
                 console.error('Unexpected error:', error.message);
                 setServerError(error.message);
+                setLoading(false)
             }
         }
     }
@@ -42,7 +48,7 @@ export default function Register() {
 
     return (
         <div className={styles.registerContainer}>
-            <form
+            {!loading && <form
                 className={styles.registerForm}
                 onSubmit={submitHandler}
             >
@@ -90,14 +96,25 @@ export default function Register() {
                     {validationErrors.repass && <p className={styles.validationError}>{validationErrors.repass}</p>}
                 </div>
 
-                {serverError && <p className={styles.serverError}>{serverError}</p>}
+                {
+                    serverError &&
+                    <div className={styles.serverError}>
+                        {serverError && <p>{serverError}</p>}
+                        {serverError && <p >Please try again!</p>}
+                    </div>
+                }
 
                 <button type="submit" className={styles.registerButton}>Register</button>
-
                 <div className={styles.loginLink}>
                     Already have an account? <a href="/login">Click here!</a>
                 </div>
-            </form>
+            </form>}
+            {loading && (
+                <div className={styles.loadingContainer}>
+                    <div className={styles.spinner}></div>
+                    <p>Loading...</p>
+                </div>
+            )}
         </div>
     );
 }
