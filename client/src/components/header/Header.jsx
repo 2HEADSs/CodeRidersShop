@@ -3,13 +3,18 @@ import styles from './Header.module.css';
 import { useAuthContext } from '../../contexts/AuthContext';
 
 export default function Header() {
-    const { isAuthenticated } = useAuthContext()
+    const {
+        isAuthenticated,
+        userEmail,
+    } = useAuthContext();
+
 
     return (
         <header className={styles.header}>
             <nav className={styles.navbar}>
                 <div className={styles.navbarHomeLink}>
                     <Link to="/" className={styles.navItem}>Home</Link>
+                    <p className={styles.userEmail}>Welcome {userEmail}</p>
                 </div>
                 <div className={styles.navbarRightLink}>
                     < Link to="/bikes" className={styles.navItem}>Bikes</Link>

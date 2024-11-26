@@ -32,6 +32,12 @@
   margin-right: auto;
 }
 
+.navbarHomeLink p {
+  color: rgb(164, 50, 50);
+  display: inline-block;
+  font-weight: bold;
+}
+
 .navItem:last-child {
   margin-right: 0;
 }
