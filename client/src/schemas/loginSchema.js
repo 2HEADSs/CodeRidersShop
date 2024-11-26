@@ -7,6 +7,7 @@ export const LoginSchema =
             .string()
             .required('Password is required')
             //TODO: Change minLenght
+            //TODO: matches
             .min(3, 'Password should be at least 8 characters long')
     })
         .required()
