@@ -1,9 +1,10 @@
 import { useNavigate } from 'react-router-dom';
 import { useRegister } from '../../hooks/useAuthentication';
 import { useForm } from '../../hooks/useForm';
+import { useState } from 'react';
+
 import styles from './Register.module.css';
 import { RegisterSchema } from '../../schemas/registerSchema';
-import { useState } from 'react';
 
 
 const initialValues = { email: '', password: '', repass: '' }

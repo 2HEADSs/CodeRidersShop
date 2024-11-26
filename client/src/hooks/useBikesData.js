@@ -65,28 +65,30 @@ export function useCreateBike() {
     const navigate = useNavigate();
 
     const [newBike, setNewBike] = useState(null);
-    const [error, setError] = useState(null);
+    const [serverError, setServerError] = useState('');
     const [loading, setLoading] = useState(false);
 
-    const clearError = () => {
-        setError(null)
+    const clearServerError = () => {
+        setServerError('')
     };
+
+
 
     const createBike = async (bikeData) => {
         setLoading(true);
-        setError(null);
+        setServerError('');
         try {
             const bikeResult = await create(bikeData);
             navigate(`/bikes/${bikeResult._id}/details`);
         } catch (error) {
-            setError(error.message);
+            setServerError(error.message);
             setNewBike(null);
         } finally {
             setLoading(false);
         }
     };
 
-    return [newBike, error, loading, createBike, clearError];
+    return [newBike, serverError, loading, createBike, clearServerError, setLoading];
 }
 
 

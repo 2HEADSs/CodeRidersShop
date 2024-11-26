@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import styles from './BikeCreate.module.css';
 import { useCreateBike } from '../../hooks/useBikesData';
+import { BikeCreateSchema } from '../../schemas/bikeSchema';
 
 const manufacturers = [
     'Access Motor', 'Adly', 'Aeon', 'AGM MOTORS', 'Aixam', 'American Ironhorse', 'Aprilia',
@@ -36,12 +37,34 @@ const initialValues = {
 };
 
 export default function BikeCreate() {
+    const [validationErrors, setValidationErrors] = useState({});
     const [bikeFormValues, setbikeFormValues] = useState(initialValues);
-    const [newBike, error, loading, createBike, clearError] = useCreateBike();
+    const [newBike, serverError, loading, createBike, clearServerError, setLoading] = useCreateBike();
 
     const submitHandler = async (e) => {
         e.preventDefault();
-        await createBike(bikeFormValues);
+        try {
+            console.log(bikeFormValues);
+            await BikeCreateSchema.validate(bikeFormValues, { abortEarly: false })
+            setLoading(true)
+            setValidationErrors({});
+            clearServerError();
+            await createBike(bikeFormValues);
+        } catch (error) {
+            if (error.name === 'ValidationError') {
+                const errors = error.inner.reduce((acc, err) => {
+                    acc[err.path] = err.message;
+                    return acc;
+                }, {});
+                setValidationErrors(errors);
+                setLoading(false);
+                console.log(errors);
+            } else {
+                setValidationErrors({});
+                console.error('Unexpected error:', error.message);
+                setLoading(false)
+            }
+        }
     };
 
     const changeHandler = (e) => {
@@ -56,24 +79,23 @@ export default function BikeCreate() {
 
     return (
         <>
-            {loading && (<p>Creating bike...</p>)}
-            {error && (
-                <>
-                    <p className={styles.errorMessage}>Server error: {error}</p>
+            {serverError && (
+                <div className={styles.serverError}>
+                    <p className={styles.errorMessage}>Server error: {serverError}</p>
                     <p className={styles.errorMessage}>Please try again:</p>
 
                     <button
-                        className={styles.errorLink}
-                        onClick={() => clearError()}
+                        className={styles.servErrorBtn}
+                        onClick={() => clearServerError()}
                     >
                         Try again
                     </button>
-                </>
+                </div>
             )}
 
-            {(!loading && !error) &&
-                < div className={styles.bikeFormContainer}>
-                    <form
+            < div className={styles.bikeFormContainer}>
+                {(!loading && !serverError) &&
+                    < form
                         className={styles.bikeForm}
                         onSubmit={submitHandler}
                     >
@@ -87,8 +109,9 @@ export default function BikeCreate() {
                                 name="model"
                                 value={bikeFormValues.model}
                                 onChange={changeHandler}
-                            // required
                             />
+                            {validationErrors.model && <p className={styles.validationError}>{validationErrors.model}</p>}
+
                         </div>
 
                         <div className={styles.inputGroup}>
@@ -98,13 +121,14 @@ export default function BikeCreate() {
                                 name="manufacturer"
                                 onChange={changeHandler}
                                 value={bikeFormValues.manufacturer}
-                            // required
                             >
                                 <option value="">Select a manufacturer</option>
                                 {manufacturers.map((manufacturer, index) => (
                                     <option key={index} value={manufacturer}>{manufacturer}</option>
                                 ))}
                             </select>
+                            {validationErrors.manufacturer && <p className={styles.validationError}>{validationErrors.manufacturer}</p>}
+
                         </div>
 
                         <div className={styles.inputGroup}>
@@ -115,8 +139,9 @@ export default function BikeCreate() {
                                 name="color"
                                 value={bikeFormValues.color}
                                 onChange={changeHandler}
-                            // required
                             />
+                            {validationErrors.color && <p className={styles.validationError}>{validationErrors.color}</p>}
+
                         </div>
 
                         <div className={styles.inputGroup}>
@@ -127,8 +152,8 @@ export default function BikeCreate() {
                                 name="engineCapacity"
                                 value={bikeFormValues.engineCapacity}
                                 onChange={changeHandler}
-                            // required
                             />
+                            {validationErrors.engineCapacity && <p className={styles.validationError}>{validationErrors.engineCapacity}</p>}
                         </div>
 
                         <div className={styles.inputGroup}>
@@ -139,8 +164,8 @@ export default function BikeCreate() {
                                 name="price"
                                 value={bikeFormValues.price}
                                 onChange={changeHandler}
-                            // required
                             />
+                            {validationErrors.price && <p className={styles.validationError}>{validationErrors.price}</p>}
                         </div>
 
                         <div className={styles.inputGroup}>
@@ -153,11 +178,9 @@ export default function BikeCreate() {
                                 onChange={changeHandler}
                                 min="1885"
                                 max="2024"
-                            // required
                             />
+                            {validationErrors.year && <p className={styles.validationError}>{validationErrors.year}</p>}
                         </div>
-
-
 
                         <div className={styles.inputGroup}>
                             <label htmlFor="img">Image URL</label>
@@ -168,6 +191,7 @@ export default function BikeCreate() {
                                 value={bikeFormValues.img}
                                 onChange={changeHandler}
                             />
+                            {validationErrors.img && <p className={styles.validationError}>{validationErrors.img}</p>}
                         </div>
 
                         <div className={styles.inputGroupUsed}>
@@ -189,13 +213,21 @@ export default function BikeCreate() {
                                 onChange={changeHandler}
                                 rows="4"
                             />
+                            {validationErrors.description && <p className={styles.validationError}>{validationErrors.description}</p>}
                         </div>
 
+                        {validationErrors && <p className={styles.validationError}>Some of the fields are not populated!</p>}
                         <button type="submit" className={styles.submitButton}>Create Bike</button>
-                    </form>
-                </div >
-            }
+                    </form>}
+                {loading && (
+                    <div className={styles.loadingContainer}>
+                        <div className={styles.spinner}></div>
+                        <p>Loading...</p>
+                    </div>
+                )}
+            </div >
         </>
+
     );
 };
 
