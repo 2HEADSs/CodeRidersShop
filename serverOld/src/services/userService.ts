@@ -3,7 +3,7 @@ dotenv.config();
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs'
 
-import User from "../models/User.js";
+import User from "../models/User";
 const secretForAccessToken = process.env.AUTH_TOKEN_SECRET;
 
 

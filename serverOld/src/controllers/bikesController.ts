@@ -1,5 +1,5 @@
 import express from 'express';
-import { createBike, deleteById, editBike, getAllBikes, getById, lastFourAdded, likeUnlikeBike, userBikes } from '../services/bikeService.js';
+import { createBike, deleteById, editBike, getAllBikes, getById, lastFourAdded, likeUnlikeBike, userBikes } from '../services/bikeService';
 const bikeController = express.Router();
 
 

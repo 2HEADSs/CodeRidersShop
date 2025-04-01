@@ -1,4 +1,4 @@
-import parseToken from "../middlewares/authMiddleware.js";
+import parseToken from "../middlewares/authMiddleware";
 
 export default function jwtParser(req, res, next) {
     const token = req.headers['x-authorization'];

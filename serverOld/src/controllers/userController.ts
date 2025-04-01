@@ -1,7 +1,7 @@
 import express from 'express';
 import bcrypt from 'bcryptjs'
 const userController = express.Router();
-import { loginUser, registerUser } from '../services/userService.js';
+import { loginUser, registerUser } from '../services/userService';
 
 
 userController.post('/register', async (req, res) => {

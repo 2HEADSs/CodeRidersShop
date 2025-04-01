@@ -3,23 +3,31 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "type": "module",
   "scripts": {
-    "start": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "bcryptjs": "^2.4.3",
+    "@prisma/client": "^6.5.0",
+    "@types/express": "^5.0.1",
+    "@types/node": "^22.13.16",
+    "@types/pg": "^8.11.11",
+    "bcryptjs": "^3.0.2",
     "cors": "^2.8.5",
-    "dompurify": "^3.1.7",
-    "dotenv": "^16.4.5",
-    "express": "^4.21.1",
-    "jsdom": "^25.0.1",
+    "dotenv": "^16.4.7",
+    "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.7.1",
-    "nodemon": "^3.1.7"
+    "nodemon": "^3.1.9",
+    "pg": "^8.14.1",
+    "prisma": "^6.5.0",
+    "typescript": "^5.8.2"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^3.0.0",
+    "@types/cors": "^2.8.17",
+    "@types/jsonwebtoken": "^9.0.9",
+    "ts-node": "^10.9.2"
   }
 }

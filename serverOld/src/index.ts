@@ -1,9 +1,9 @@
-import express from 'express';
+import express, { json } from 'express';
 import mongoose from 'mongoose';
-import router from './src/router.js'
-import cors from './src/middlewares/cors.js';
-import sanitize from './src/middlewares/sanitize.js';
-import jwtParser from './src/utils/jwtParser.js';
+import router from './router'
+import cors from './middlewares/cors';
+import sanitize from './middlewares/sanitize';
+import jwtParser from './utils/jwtParser';
 
 
 
@@ -23,7 +23,7 @@ function runDB() {
 
 function serverStart() {
     runDB();
-    app.use(express.json())
+    app.use(json())
     app.use(cors())
     app.use(sanitize)
     app.use(jwtParser)
