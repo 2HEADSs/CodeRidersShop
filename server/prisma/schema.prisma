@@ -24,29 +24,26 @@ model User {
   likedBikes     Bike[]   @relation(name: "liked")
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
-  Bike           Bike?    @relation(fields: [bikeId], references: [id])
-  bikeId         Int?
 
   @@map("users")
 }
 
 model Bike {
-  id             Int      @id @default(autoincrement())
-  model          String   @db.VarChar(255)
-  manufacturer   String   @db.VarChar(255)
-  color          String   @db.VarChar(50)
+  id             Int          @id @default(autoincrement())
+  model          String       @db.VarChar(255)
+  manufacturer   Manufacturer
+  color          String       @db.VarChar(50)
   engineCapacity Float
   price          Float
   year           Int
   used           Boolean
   img            String? // Optional
-  description    String   @default("Random Description")
-  ownerId        Int      @unique
-  owner          User     @relation(fields: [ownerId], references: [id], name: "CreatedByUser")
-  likedByUsers   User[]   @relation(name: "liked")
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
-  User           User[]
+  description    String       @default("Random Description")
+  ownerId        Int
+  owner          User         @relation(fields: [ownerId], references: [id], name: "CreatedByUser")
+  likedByUsers   User[]       @relation(name: "liked")
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
 
   @@map("bikes")
 }
