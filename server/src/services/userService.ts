@@ -5,7 +5,6 @@ import prisma from '../prismaClient';
 import { UserDataRegisterService } from '../types';
 
 import dotenv from 'dotenv';
-import { log } from 'console';
 dotenv.config();
 const secretForAccessToken = process.env.AUTH_TOKEN_SECRET;
 

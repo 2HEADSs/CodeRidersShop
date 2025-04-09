@@ -13,4 +13,5 @@ router.get('/', (req, res) => {
 });
 
 router.use('/users', userController);
+router.use('/bikes', userController);
 export default router;

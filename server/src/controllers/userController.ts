@@ -1,12 +1,12 @@
 import express from 'express';
 import bcrypt from 'bcryptjs'
-const userController = express.Router();
+const usersController = express.Router();
 import { registerUser, loginUser } from '../services/userService';
 import { UserDataLoginController, UserDataRegisterController } from '../types';
 
 
 
-userController.post('/register', async (req, res) => {
+usersController.post('/register', async (req, res) => {
 
     try {
         const { email, firstName, lastName, phone, password, repass }: UserDataRegisterController = req.body;
@@ -56,7 +56,7 @@ userController.post('/register', async (req, res) => {
 
 });
 
-userController.post('/login', async (req, res) => {
+usersController.post('/login', async (req, res) => {
 
     try {
 
@@ -78,4 +78,4 @@ userController.post('/login', async (req, res) => {
 
 
 
-export default userController;
+export default usersController;

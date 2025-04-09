@@ -9,11 +9,12 @@ if (!accesTokenSecret) {
 
 
 interface TokenPayload {
-    userId?: number;
+    userId?: string;
     email?: string;
 }
 
 export default function parseToken(token: string): TokenPayload {
+
     try {
         const decodedToken = jwt.verify(token, accesTokenSecret!) as TokenPayload
         return decodedToken;

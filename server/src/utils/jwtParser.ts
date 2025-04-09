@@ -1,16 +1,17 @@
+import { NextFunction } from "express";
 import parseToken from "../middlewares/authMiddleware";
 
-export default function jwtParser(req, res, next) {
-    const token = req.headers['x-authorization'];
-
+export default function jwtParser(req: Request, res: Response, next: NextFunction) {
+    const token: string | null = req.get('x-authorization');
+    let userId: string | undefined;
     if (token) {
         try {
             const tokenData = parseToken(token);
-            req.requesterId = tokenData._id;
+            userId = tokenData.userId;
         } catch (error) {
-            return res.status(401).json({ message: 'Invalid authorization token' });
+            return res.status(401).send('Invalid authorization token');
         }
     }
-    next();
+    next(userId);
 }
 
