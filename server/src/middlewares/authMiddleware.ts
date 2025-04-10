@@ -17,6 +17,8 @@ export default function parseToken(token: string): TokenPayload {
 
     try {
         const decodedToken = jwt.verify(token, accesTokenSecret!) as TokenPayload
+        console.log('decodedToken:', decodedToken);
+
         return decodedToken;
     } catch (error) {
         throw new Error('Invalid acces token!');

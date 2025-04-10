@@ -8,18 +8,19 @@ async function getAllBikes() {
 
 //TODO: owmerId from token > refactoring;
 async function createBike(requestBody: BikeCreate, ownerId: string) {
-    const createdBike = await prisma.bike.create({
-        data: {
-            ...requestBody,
-            owner: {
-                connect: {
-                    id: ownerId,
-                },
-            },
-        },
-    });
+    // const createdBike = await prisma.bike.create({
+    //     data: {
+    //         ...requestBody,
+    //         owner: {
+    //             connect: {
+    //                 id: ownerId,
+    //             },
+    //         },
+    //     },
+    // });
 
-    return createdBike;
+    return true
+    // return createdBike;
 }
 
 
