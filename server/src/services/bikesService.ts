@@ -18,6 +18,7 @@ async function createBike(requestBody: BikeCreate, ownerId: string) {
     //         },
     //     },
     // });
+    console.log('bikeService user:', ownerId);
 
     return true
     // return createdBike;

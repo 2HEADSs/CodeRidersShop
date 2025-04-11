@@ -13,7 +13,8 @@ bikesController.get('/', async (req, res) => {
         res.status(400).json({ message: error.message });
 
     }
-})
+});
+
 
 bikesController.post(
     '/create',
@@ -21,7 +22,7 @@ bikesController.post(
     async (req: Request, res: Response) => {
         try {
             console.log('Authenticated user:', req.user);
-            const createdBike = await createBike(req.body, (req.user as any).userId);
+            const createdBike = await createBike(req.body, (req.user as any).id);
             res.status(200).json({ message: 'Bike created!', data: createdBike });
         } catch (error: any) {
             console.error(error);
